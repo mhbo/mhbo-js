@@ -19,3 +19,8 @@ export type RestResource<T> = {
 export type MHBOApiClient = {
   homes: RestResource<MobileHome>
 }
+
+export type FetchExecutor = (
+  input: RequestInfo,
+  init?: RequestOptions
+) => Promise<Response>
