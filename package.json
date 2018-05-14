@@ -15,9 +15,13 @@
   },
   "scripts": {
     "flow": "flow",
-    "test": "jest",
+    "test": "yarn run build; jest ./lib",
     "build": "flow-remove-types src/ -d lib/; prettier --write ./lib/**/*.js",
     "prepublish": "yarn run build"
+  },
+  "jest": {
+    "verbose": true,
+    "roots": ["lib"]
   },
   "dependencies": {
     "es6-promise": "^4.2.4",
