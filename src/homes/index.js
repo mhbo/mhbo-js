@@ -4,35 +4,40 @@ const { token } = require("../token")
 
 import type {
   Environment,
+  FetchExecutor,
   Credentials,
   MobileHome,
   RestResource
 } from "../types.flow"
 
 /**
- * Performs a search for
+ * Performs a search for mobile homes.
  *
- * @param {?Environment} environment
  * @param {Credentials} creds
+ * @param {?Environment} environment,
+ * @param {?FetchExecutor} fetchExecutor
  * @returns {Promise<MobileHome[]>}
  */
 function search(
+  creds: Credentials,
   environment: ?Environment,
-  creds: Credentials
+  fetchExecutor: ?FetchExecutor
 ): Promise<MobileHome[]> {
   return authenticatedRequest(
-    environment,
     token(creds),
     "GET",
-    "v1/mobile_homes/"
+    "v1/mobile_homes/",
+    environment,
+    fetchExecutor
   )
     .then(response => response.json())
     .then(json => json || [])
 }
 
 module.exports = (
+  creds: Credentials,
   environment: ?Environment,
-  creds: Credentials
+  fetchExecutor: ?FetchExecutor
 ): RestResource<MobileHome> => ({
-  search: () => search(environment, creds)
+  search: () => search(creds, environment, fetchExecutor)
 })
