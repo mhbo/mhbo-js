@@ -2,15 +2,26 @@
   "name": "mhbo-js",
   "version": "1.0.0",
   "description": "A JS wrapper for interacting with the MHBO API.",
-  "main": "index.js",
+  "main": "lib/index.js",
   "repository": "https://github.com/mhbo/mhbo-js.git",
   "author": "MHBO Inc.",
   "license": "MIT",
   "private": true,
   "devDependencies": {
-    "jest": "^22.4.3"
+    "flow-bin": "^0.72.0",
+    "flow-remove-types": "^1.2.3",
+    "jest": "^22.4.3",
+    "prettier": "^1.12.1"
+  },
+  "scripts": {
+    "flow": "flow",
+    "test": "jest",
+    "build": "flow-remove-types src/ -d lib/; prettier --write ./lib/**/*.js",
+    "prepublish": "yarn run build"
   },
   "dependencies": {
+    "es6-promise": "^4.2.4",
+    "isomorphic-fetch": "^2.2.1",
     "jsonwebtoken": "^8.2.1"
   }
 }
