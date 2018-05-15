@@ -19,8 +19,7 @@
     "test": "yarn run build; jest ./lib",
     "build": "rm -rf ./lib; flow-copy-source src lib; flow-remove-types src/ -d lib/; prettier --write ./lib/*.js ./lib/**/*.js",
     "release": "yarn run build; find ./lib -type f -name \"*.test.js\" -delete; find ./lib -type f -name \"*.flow.js\" -delete",
-    "prepublish": "yarn run release",
-    "example": "yarn run build; node ./lib/index.js"
+    "prepublish": "yarn run release"
   },
   "jest": {
     "verbose": true,
