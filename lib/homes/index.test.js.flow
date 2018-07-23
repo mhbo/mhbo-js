@@ -16,7 +16,12 @@ const homes = resource(
 describe("the homes resource", () => {
   describe("#search", () => {
     beforeEach(() => {
-      homes.search()
+      homes.search({
+        numBedrooms: 3,
+        numBathrooms: 2,
+        maxBudget: 100000,
+        minBudget: 50000
+      })
     })
 
     it("should make 1 fetch request", () => {
@@ -25,7 +30,7 @@ describe("the homes resource", () => {
 
     it("should call the search endpoint", () => {
       expect(mockFetch.mock.calls[0][0]).toBe(
-        "http://localhost:3000/api/v1/mobile_homes/"
+        "http://localhost:3000/api/v1/mobile_homes/?num_bedrooms=3&num_bathrooms=2&max_budget=100000&min_budget=50000"
       )
     })
 
