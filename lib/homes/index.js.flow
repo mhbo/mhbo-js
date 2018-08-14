@@ -47,5 +47,6 @@ module.exports = (
   environment: ?Environment,
   fetchExecutor: ?FetchExecutor
 ): RestResource<MobileHome> => ({
-  search: params => search(params, creds, environment, fetchExecutor)
+  search: (params: SearchParams) =>
+    search(params, creds, environment, fetchExecutor)
 })
