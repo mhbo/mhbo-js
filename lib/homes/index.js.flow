@@ -26,7 +26,7 @@ function search(
   environment: ?Environment,
   fetchExecutor: ?FetchExecutor
 ): Promise<MobileHome[]> {
-  authenticatedRequest(
+  return authenticatedRequest(
     token(creds),
     "GET",
     `v1/mobile_homes/?${queryBuilder(params)}`,
