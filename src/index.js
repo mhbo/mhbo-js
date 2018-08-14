@@ -1,5 +1,6 @@
 //@flow
 const homes = require("./homes")
+const { MODEL_TYPES, COMMUNITY_TYPES } = require("./constants")
 
 import type { Environment, MHBOApiClient, Credentials } from "./types.flow.js"
 

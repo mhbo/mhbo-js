@@ -5,8 +5,8 @@ export type Environment = "PRODUCTION" | "STAGING" | "DEVELOPMENT"
 export type Coordinate = { latitude: number, longitude: number }
 
 export type SearchParams = {
-  forPurchase: boolean,
-  forRent: boolean,
+  listingTypeIds: Array<number>,
+  modelTypeIds?: Array<number>,
   numBedrooms?: number,
   numBathrooms?: number,
   maxPrice?: number,

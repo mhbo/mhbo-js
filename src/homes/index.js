@@ -1,8 +1,7 @@
 //@flow
 const { authenticatedRequest } = require("../requests")
 const { token } = require("../token")
-const snakecase = require("lodash.snakecase")
-const qs = require("qs")
+const queryBuilder = require("./queryBuilder")
 
 import type {
   Environment,
@@ -27,14 +26,10 @@ function search(
   environment: ?Environment,
   fetchExecutor: ?FetchExecutor
 ): Promise<MobileHome[]> {
-  const searchAttributes = Object.keys(params).reduce(
-    (p, k) => Object.assign({}, p, { [snakecase(k)]: params[k] }),
-    {}
-  )
-  return authenticatedRequest(
+  authenticatedRequest(
     token(creds),
     "GET",
-    `v1/mobile_homes/?${qs.stringify(searchAttributes)}`,
+    `v1/mobile_homes/?${queryBuilder(params)}`,
     environment,
     fetchExecutor
   )
