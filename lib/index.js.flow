@@ -21,4 +21,7 @@ function Client(
   return { homes: homes(creds, environment) }
 }
 
+Client.MODEL_TYPES = MODEL_TYPES
+Client.COMMUNITY_TYPES = COMMUNITY_TYPES
+
 module.exports = Client
