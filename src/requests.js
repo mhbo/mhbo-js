@@ -39,7 +39,9 @@ function authenticatedRequest(
   fetchExecutor: ?FetchExecutor
 ): Promise<Response> {
   const request = fetchExecutor || fetch
-  return request(baseURL(environment) + uri, {
+  const url = baseURL(environment) + uri
+  console.log("[MHBO-JS] [" + method + "]: " + url)
+  return request(url, {
     method,
     headers: {
       Authorization: `Bearer ${token}`
