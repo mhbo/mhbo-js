@@ -13,10 +13,12 @@ const queryBuilder = (params: SearchParams) => {
   })
   return qs
     .stringify(
-      Object.keys(query).reduce(
-        (p, k) => Object.assign({}, p, { [snakecase(k)]: query[k] }),
-        {}
-      )
+      Object.keys(query)
+        .filter(k => query[k] !== "")
+        .reduce(
+          (p, k) => Object.assign({}, p, { [snakecase(k)]: query[k] }),
+          {}
+        )
     )
     .replace("location", "display_location")
     .replace(/num_bathrooms/g, "num_bathrooms%5B%5D")
