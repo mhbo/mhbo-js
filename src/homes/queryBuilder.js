@@ -9,7 +9,7 @@ import type { SearchParams } from "../types.flow"
 const queryBuilder = (params: SearchParams) => {
   const query = Object.assign({}, params, {
     isAllAges: params.isAllAges ? "yes" : "no",
-    isSenior: params.isSenior ? "yes" : "no"
+    isSenior: params.isAllAges ? "no" : "yes"
   })
   return qs
     .stringify(
