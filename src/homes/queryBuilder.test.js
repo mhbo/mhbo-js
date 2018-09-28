@@ -5,7 +5,7 @@ describe("the query builder", () => {
     const query = queryBuilder({
       modelTypeIds: [1, 2],
       listingTypeIds: [1],
-      isAllAges: true,
+      ageRestrictionType: 1,
       numBedrooms: 3,
       numBathrooms: 2,
       maxPrice: 5000,
@@ -13,7 +13,21 @@ describe("the query builder", () => {
       location: "Mesa, AZ"
     })
     expect(query).toEqual(
-      "model_type_id%5B%5D=1&model_type_id%5B%5D=2&listing_type_id%5B%5D=1&is_all_ages=yes&is_senior=no&num_bedrooms%5B%5D=3&num_bathrooms%5B%5D=2&max_price=5000&min_price=0&display_location=Mesa%2C%20AZ"
+      "model_type_id%5B%5D=1&model_type_id%5B%5D=2&listing_type_id%5B%5D=1&age_restriction_type%5B%5D=1&num_bedrooms%5B%5D=3&num_bathrooms%5B%5D=2&max_price=5000&min_price=0&display_location=Mesa%2C%20AZ"
+    )
+  })
+
+  it("should exclude bathrooms and bedrooms if not included", () => {
+    const query = queryBuilder({
+      modelTypeIds: [1, 2],
+      listingTypeIds: [1],
+      ageRestrictionType: 1,
+      maxPrice: 5000,
+      minPrice: 0,
+      location: "Mesa, AZ"
+    })
+    expect(query).toEqual(
+      "model_type_id%5B%5D=1&model_type_id%5B%5D=2&listing_type_id%5B%5D=1&age_restriction_type%5B%5D=1&max_price=5000&min_price=0&display_location=Mesa%2C%20AZ"
     )
   })
 
@@ -21,7 +35,7 @@ describe("the query builder", () => {
     const query = queryBuilder({
       modelTypeIds: [],
       listingTypeIds: [],
-      isAllAges: true,
+      ageRestrictionType: 1,
       numBedrooms: 3,
       numBathrooms: 2,
       maxPrice: 5000,
@@ -29,7 +43,7 @@ describe("the query builder", () => {
       location: "Mesa, AZ"
     })
     expect(query).toEqual(
-      "is_all_ages=yes&is_senior=no&num_bedrooms%5B%5D=3&num_bathrooms%5B%5D=2&max_price=5000&min_price=0&display_location=Mesa%2C%20AZ"
+      "age_restriction_type%5B%5D=1&num_bedrooms%5B%5D=3&num_bathrooms%5B%5D=2&max_price=5000&min_price=0&display_location=Mesa%2C%20AZ"
     )
   })
 })

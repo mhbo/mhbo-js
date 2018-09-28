@@ -12,7 +12,7 @@ export type SearchParams = {
   maxPrice?: number,
   minPrice?: number,
   location?: Coordinate,
-  isAllAges?: boolean
+  ageRestrictionType?: number
 }
 
 export type Credentials = {
