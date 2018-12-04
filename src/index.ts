@@ -23,4 +23,6 @@ function Client(
 Client.MODEL_TYPES = MODEL_TYPES
 Client.LISTING_TYPES = LISTING_TYPES
 
+export { Credentials, Environment, MHBOApiClient }
+
 export default Client
