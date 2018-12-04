@@ -1,8 +1,7 @@
-//@flow
-const homes = require("./homes")
-const { MODEL_TYPES, LISTING_TYPES } = require("./constants")
+import homes from "./homes"
+import { MODEL_TYPES, LISTING_TYPES } from "./constants"
 
-import type { Environment, MHBOApiClient, Credentials } from "./types.flow.js"
+import { Environment, MHBOApiClient, Credentials } from "./types.js"
 
 /**
  * Initializes a new instance of the MHBO API Client.
@@ -15,7 +14,7 @@ import type { Environment, MHBOApiClient, Credentials } from "./types.flow.js"
 function Client(
   apiAccessKey: string,
   apiSecret: string,
-  environment: ?Environment
+  environment?: Environment
 ): MHBOApiClient {
   const creds: Credentials = { apiAccessKey, apiSecret }
   return { homes: homes(creds, environment) }
@@ -24,4 +23,4 @@ function Client(
 Client.MODEL_TYPES = MODEL_TYPES
 Client.LISTING_TYPES = LISTING_TYPES
 
-module.exports = Client
+export default Client
