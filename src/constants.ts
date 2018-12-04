@@ -1,6 +1,4 @@
-//@flow
-
-const MODEL_TYPES = {
+export const MODEL_TYPES = {
   SINGLE_WIDE: 1,
   DOUBLE_WIDE: 2,
   TRIPLE_WIDE: 3,
@@ -8,13 +6,8 @@ const MODEL_TYPES = {
   UNSPECIFIED: 5
 }
 
-const LISTING_TYPES = {
+export const LISTING_TYPES = {
   FOR_PURCHASE: 1,
   FOR_RENT: 2,
   FOR_RENT_TO_OWN: 3
-}
-
-module.exports = {
-  MODEL_TYPES,
-  LISTING_TYPES
 }
