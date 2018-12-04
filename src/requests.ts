@@ -9,9 +9,9 @@ import { Environment, FetchExecutor } from "./types"
  */
 function baseURL(environment?: Environment): string {
   switch (environment) {
-    case "DEVELOPMENT":
+    case Environment.Development:
       return "http://localhost:3000/api/"
-    case "STAGING":
+    case Environment.Staging:
       return "https://staging.mhbo.com/api/"
     default:
       return "https://mhbo.com/api/"
