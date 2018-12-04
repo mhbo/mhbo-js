@@ -1,20 +1,18 @@
-//@flow
-const snakecase = require("lodash.snakecase")
-const qs = require("querystring")
-
-import type { SearchParams } from "../types.flow"
+import { snakeCase } from "lodash"
+import * as qs from "querystring"
+import { SearchParams } from "../types"
 
 // ?is_all_ages=yes&is_senior=yes&max_price=100000&model_type_id%5B%5D=3&model_type_id%5B%5D=4&model_type_id%5B%5D=5&sort=newest-listings&view_type=list
 
 const queryBuilder = (params: SearchParams) => {
-  const query = Object.assign({}, params)
+  const query: { [name: string]: any } = Object.assign({}, params)
   return qs
     .stringify(
       Object.keys(query)
         .filter(k => typeof query[k] !== undefined)
         .filter(k => query[k] !== "")
         .reduce(
-          (p, k) => Object.assign({}, p, { [snakecase(k)]: query[k] }),
+          (p, k) => Object.assign({}, p, { [snakeCase(k)]: query[k] }),
           {}
         )
     )
@@ -26,4 +24,4 @@ const queryBuilder = (params: SearchParams) => {
     .replace(/age_restriction_type/g, "age_restriction_type%5B%5D")
 }
 
-module.exports = queryBuilder
+export default queryBuilder
