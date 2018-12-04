@@ -24,11 +24,11 @@
     "lint": "tslint -p tsconfig.json",
     "test": "jest --config jestconfig.json",
     "build": "rm -rf ./lib; tsc",
-    "prepare" : "npm run build",
-    "prepublishOnly" : "npm test && npm run lint",
-    "preversion" : "npm run lint",
-    "version" : "npm run format && git add -A src",
-    "postversion" : "git push && git push --tags"
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run lint",
+    "preversion": "npm run lint",
+    "version": "npm run format && git add -A src",
+    "postversion": "git push && git push --tags"
   },
   "dependencies": {
     "@types/isomorphic-fetch": "^0.0.34",
