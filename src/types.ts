@@ -1,6 +1,8 @@
-import { RequestOptions } from "https"
-
-export type Environment = "PRODUCTION" | "STAGING" | "DEVELOPMENT"
+export enum Environment {
+  Production = "PRODUCTION",
+  Staging = "STAGING",
+  Development = "DEVELOPMENT"
+}
 
 export interface Coordinate {
   latitude: number
