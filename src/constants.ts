@@ -1,8 +1,8 @@
 export const MODEL_TYPES = {
-  SINGLE_WIDE: 1,
   DOUBLE_WIDE: 2,
-  TRIPLE_WIDE: 3,
   PARK_MODEL: 4,
+  SINGLE_WIDE: 1,
+  TRIPLE_WIDE: 3,
   UNSPECIFIED: 5
 }
 

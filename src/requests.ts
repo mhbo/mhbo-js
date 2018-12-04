@@ -1,5 +1,4 @@
-require("isomorphic-fetch")
-
+import "isomorphic-fetch"
 import { Environment, FetchExecutor } from "./types"
 
 /**
@@ -39,11 +38,10 @@ export function authenticatedRequest(
 ): Promise<Response> {
   const request: FetchExecutor = fetchExecutor || fetch
   const url = baseURL(environment) + uri
-  console.log("[MHBO-JS] [" + method + "]: " + url)
   return request(url, {
-    method,
     headers: {
       Authorization: `Bearer ${token}`
-    }
+    },
+    method
   })
 }

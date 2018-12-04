@@ -8,8 +8,8 @@ export interface Coordinate {
 }
 
 export interface SearchParams {
-  listingTypeIds: Array<number>
-  modelTypeIds?: Array<number>
+  listingTypeIds: number[]
+  modelTypeIds?: number[]
   numBedrooms?: number
   numBathrooms?: number
   maxPrice?: number

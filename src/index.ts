@@ -1,7 +1,7 @@
+import { LISTING_TYPES, MODEL_TYPES } from "./constants"
 import homes from "./homes"
-import { MODEL_TYPES, LISTING_TYPES } from "./constants"
 
-import { Environment, MHBOApiClient, Credentials } from "./types.js"
+import { Credentials, Environment, MHBOApiClient } from "./types.js"
 
 /**
  * Initializes a new instance of the MHBO API Client.

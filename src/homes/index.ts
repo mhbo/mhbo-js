@@ -3,12 +3,12 @@ import { token } from "../token"
 import queryBuilder from "./queryBuilder"
 
 import {
+  Credentials,
   Environment,
   FetchExecutor,
-  Credentials,
   MobileHome,
-  SearchParams,
-  RestResource
+  RestResource,
+  SearchParams
 } from "../types"
 
 /**

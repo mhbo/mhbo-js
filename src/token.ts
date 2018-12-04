@@ -1,4 +1,3 @@
-//@flow
 import * as jwt from "jsonwebtoken"
 import { Credentials } from "./types"
 
@@ -15,8 +14,8 @@ const SUPPORTED_ALG = "HS512"
 export function token(creds: Credentials): string {
   return jwt.sign(
     {
-      mhbo_access_key: creds.apiAccessKey,
-      iat: Date.now() - 5
+      iat: Date.now() - 5,
+      mhbo_access_key: creds.apiAccessKey
     },
     creds.apiSecret,
     {
