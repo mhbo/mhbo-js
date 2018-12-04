@@ -1,7 +1,6 @@
-//@flow
 require("isomorphic-fetch")
 
-import type { Environment, FetchExecutor } from "./types.flow"
+import { Environment, FetchExecutor } from "./types"
 
 /**
  * Retrieves the proper base url for the supplied environment.
@@ -9,7 +8,7 @@ import type { Environment, FetchExecutor } from "./types.flow"
  * @param {?Environment} environment Used to determine the current base url.
  * @returns {string} A base URL for the supplied environment.
  */
-function baseURL(environment: ?Environment): string {
+function baseURL(environment?: Environment): string {
   switch (environment) {
     case "DEVELOPMENT":
       return "http://localhost:3000/api/"
@@ -31,14 +30,14 @@ function baseURL(environment: ?Environment): string {
  * @param {?FetchExecutor} fetchExecutor An optional override to perform the HTTP request.
  * @returns {Promise<Response>} The result of the fetch call.
  */
-function authenticatedRequest(
+export function authenticatedRequest(
   token: string,
   method: string,
   uri: string,
-  environment: ?Environment,
-  fetchExecutor: ?FetchExecutor
+  environment?: Environment,
+  fetchExecutor?: FetchExecutor
 ): Promise<Response> {
-  const request = fetchExecutor || fetch
+  const request: FetchExecutor = fetchExecutor || fetch
   const url = baseURL(environment) + uri
   console.log("[MHBO-JS] [" + method + "]: " + url)
   return request(url, {
@@ -47,8 +46,4 @@ function authenticatedRequest(
       Authorization: `Bearer ${token}`
     }
   })
-}
-
-module.exports = {
-  authenticatedRequest
 }
