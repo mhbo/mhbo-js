@@ -1,16 +1,15 @@
-//@flow
-const { authenticatedRequest } = require("../requests")
-const { token } = require("../token")
-const queryBuilder = require("./queryBuilder")
+import { authenticatedRequest } from "../requests"
+import { token } from "../token"
+import queryBuilder from "./queryBuilder"
 
-import type {
+import {
   Environment,
   FetchExecutor,
   Credentials,
   MobileHome,
   SearchParams,
   RestResource
-} from "../types.flow"
+} from "../types"
 
 /**
  * Performs a search for mobile homes.
@@ -23,8 +22,8 @@ import type {
 function search(
   params: SearchParams,
   creds: Credentials,
-  environment: ?Environment,
-  fetchExecutor: ?FetchExecutor
+  environment?: Environment,
+  fetchExecutor?: FetchExecutor
 ): Promise<MobileHome[]> {
   return authenticatedRequest(
     token(creds),
@@ -33,15 +32,17 @@ function search(
     environment,
     fetchExecutor
   )
-    .then(response => response.json())
-    .then(json => json || [])
+    .then((response: Response) => response.json())
+    .then((json: any) => json || [])
 }
 
-module.exports = (
+const homes = (
   creds: Credentials,
-  environment: ?Environment,
-  fetchExecutor: ?FetchExecutor
+  environment?: Environment,
+  fetchExecutor?: FetchExecutor
 ): RestResource<MobileHome> => ({
   search: (params: SearchParams) =>
     search(params, creds, environment, fetchExecutor)
 })
+
+export default homes
