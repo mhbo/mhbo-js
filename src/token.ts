@@ -1,7 +1,6 @@
 //@flow
-const jwt = require("jsonwebtoken")
-
-import type { Credentials } from "./types.flow"
+import * as jwt from "jsonwebtoken"
+import { Credentials } from "./types"
 
 // The MHBO API only supports HS512 in it's V1 incarnation.
 const SUPPORTED_ALG = "HS512"
@@ -13,7 +12,7 @@ const SUPPORTED_ALG = "HS512"
  * @param {Credentials} creds The access key and the secret to sign the token.
  * @returns {string} A signed JWT.
  */
-function token(creds: Credentials): string {
+export function token(creds: Credentials): string {
   return jwt.sign(
     {
       mhbo_access_key: creds.apiAccessKey,
@@ -24,8 +23,4 @@ function token(creds: Credentials): string {
       algorithm: SUPPORTED_ALG
     }
   )
-}
-
-module.exports = {
-  token
 }
