@@ -1,4 +1,4 @@
-const { authenticatedRequest } = require("./requests")
+import { authenticatedRequest } from "../requests"
 const mockFetch = jest.fn()
 
 // A simple example test

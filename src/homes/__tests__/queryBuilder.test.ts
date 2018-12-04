@@ -1,4 +1,4 @@
-const queryBuilder = require("./queryBuilder")
+import queryBuilder from "../queryBuilder"
 
 describe("the query builder", () => {
   it("should map all attributes as an appropriate query string", () => {
