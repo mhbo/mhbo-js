@@ -38,6 +38,9 @@ export function authenticatedRequest(
 ): Promise<Response> {
   const request: FetchExecutor = fetchExecutor || fetch
   const url = baseURL(environment) + uri
+  /* tslint:disable:no-console */
+  console.log(`[MHBO-JS] ${method} | ${url}`)
+  /* tslint:enable:no-console */
   return request(url, {
     headers: {
       Authorization: `Bearer ${token}`
