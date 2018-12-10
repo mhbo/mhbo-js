@@ -21,6 +21,7 @@ const queryBuilder = (params: SearchParams) => {
     .replace(/num_bedrooms/g, "num_bedrooms%5B%5D")
     .replace(/model_type_ids/g, "model_type_id%5B%5D")
     .replace(/listing_type_ids/g, "listing_type_id%5B%5D")
+    .replace(/seller_type_ids/g, "seller_type_id%5B%5D")
     .replace(/age_restriction_type/g, "age_restriction_type%5B%5D")
 }
 

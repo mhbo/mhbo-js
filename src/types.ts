@@ -11,6 +11,7 @@ export interface Coordinate {
 
 export interface SearchParams {
   listingTypeIds: number[]
+  sellerTypeIds?: number[]
   modelTypeIds?: number[]
   numBedrooms?: number
   numBathrooms?: number
