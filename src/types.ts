@@ -10,17 +10,25 @@ export interface Coordinate {
 }
 
 export interface SearchParams {
+  ageRestrictionType?: number
+  lenderRepos?: boolean
   listingTypeIds: number[]
-  sellerTypeIds?: number[]
-  modelTypeIds?: number[]
-  numBedrooms?: number
-  numBathrooms?: number
+  location?: string
   maxPrice?: number
   minPrice?: number
-  location?: string
-  ageRestrictionType?: number
-  radius?: number
+  modelTypeIds?: number[]
+  numBathrooms?: number
+  numBedrooms?: number
+  openHousesOnly?: boolean
   pageCount?: number
+  preOwned?: boolean
+  radius?: number
+  sellerTypeIds?: number[]
+  withBoatStorage?: boolean
+  withGolfInCommunity?: boolean
+  withOnSiteCustomerService?: boolean
+  withRvParking?: boolean
+  withTennisInCommunity?: boolean
 }
 
 export interface Credentials {

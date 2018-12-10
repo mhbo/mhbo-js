@@ -4,6 +4,7 @@ describe("the query builder", () => {
   it("should map all attributes as an appropriate query string", () => {
     const query = queryBuilder({
       ageRestrictionType: 1,
+      lenderRepos: true,
       listingTypeIds: [1],
       location: "Mesa, AZ",
       maxPrice: 5000,
@@ -11,10 +12,11 @@ describe("the query builder", () => {
       modelTypeIds: [1, 2],
       numBathrooms: 2,
       numBedrooms: 3,
+      preOwned: false,
       sellerTypeIds: [3]
     })
     expect(query).toEqual(
-      "age_restriction_type%5B%5D=1&listing_type_id%5B%5D=1&display_location=Mesa%2C%20AZ&max_price=5000&min_price=0&model_type_id%5B%5D=1&model_type_id%5B%5D=2&num_bathrooms%5B%5D=2&num_bedrooms%5B%5D=3&seller_type_id%5B%5D=3"
+      "age_restriction_type%5B%5D=1&lender_repos=true&listing_type_id%5B%5D=1&display_location=Mesa%2C%20AZ&max_price=5000&min_price=0&model_type_id%5B%5D=1&model_type_id%5B%5D=2&num_bathrooms%5B%5D=2&num_bedrooms%5B%5D=3&pre_owned=false&seller_type_id%5B%5D=3"
     )
   })
 
