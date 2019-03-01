@@ -1,5 +1,5 @@
 import * as jwt from "jsonwebtoken"
-import { Environment } from "../../types"
+import { IEnvironment } from "../../types"
 import resource from "../index"
 
 const emptyPromise = (val: any) => new Promise((resolve, _) => resolve(val))
@@ -12,7 +12,7 @@ const homes = resource(
     apiAccessKey,
     apiSecret
   },
-  Environment.Development,
+  IEnvironment.Development,
   mockFetch
 )
 

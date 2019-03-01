@@ -1,15 +1,15 @@
-export enum Environment {
+export enum IEnvironment {
   Production = "PRODUCTION",
   Staging = "STAGING",
   Development = "DEVELOPMENT"
 }
 
-export interface Coordinate {
+export interface ICoordinate {
   latitude: number
   longitude: number
 }
 
-export interface SearchParams {
+export interface ISearchParams {
   ageRestrictionType?: number
   lenderRepos?: boolean
   listingTypeIds: number[]
@@ -31,15 +31,28 @@ export interface SearchParams {
   withTennisInCommunity?: boolean
 }
 
-export interface Credentials {
+export interface ICredentials {
   apiAccessKey: string
   apiSecret: string
 }
 
-export interface MobileHome {
-  address: string
+export interface IAddress {
+  city: string
+  county: string
+  latitude: number
+  longitude: number
+  lotNum: number
+  numberAndStreet: string
+  state: string
+  zipCode: string
+}
+
+export interface IMobileHome {
+  address: IAddress
   askingPrice: number
   id: number
+  latitude: number
+  longitude: number
   manufacturerName: string
   modelType: string
   photoSmall: string
@@ -47,15 +60,15 @@ export interface MobileHome {
   url: string
 }
 
-export interface RestResource<T> {
-  search: (params: SearchParams) => Promise<T[]>
+export interface IRestResource<T> {
+  search: (params: ISearchParams) => Promise<T[]>
 }
 
-export interface MHBOApiClient {
-  homes: RestResource<MobileHome>
+export interface IMHBOApiClient {
+  homes: IRestResource<IMobileHome>
 }
 
-export type FetchExecutor = (
+export type IFetchExecutor = (
   input: RequestInfo,
   init?: RequestInit
 ) => Promise<Response>

@@ -1,5 +1,5 @@
 import { authenticatedRequest } from "../requests"
-import { Environment } from "../types"
+import { IEnvironment } from "../types"
 const mockFetch = jest.fn()
 
 // A simple example test
@@ -9,7 +9,7 @@ describe("authenticatedRequest()", () => {
       "testJWT",
       "POST",
       "v1/some/endpoint",
-      Environment.Development,
+      IEnvironment.Development,
       mockFetch
     )
   })

@@ -3,28 +3,28 @@ import { token } from "../token"
 import queryBuilder from "./queryBuilder"
 
 import {
-  Credentials,
-  Environment,
-  FetchExecutor,
-  MobileHome,
-  RestResource,
-  SearchParams
+  ICredentials,
+  IEnvironment,
+  IFetchExecutor,
+  IMobileHome,
+  IRestResource,
+  ISearchParams
 } from "../types"
 
 /**
  * Performs a search for mobile homes.
  *
- * @param {Credentials} creds
- * @param {?Environment} environment,
- * @param {?FetchExecutor} fetchExecutor
+ * @param {ICredentials} creds
+ * @param {?IEnvironment} environment,
+ * @param {?IFetchExecutor} fetchExecutor
  * @returns {Promise<MobileHome[]>}
  */
 function search(
-  params: SearchParams,
-  creds: Credentials,
-  environment?: Environment,
-  fetchExecutor?: FetchExecutor
-): Promise<MobileHome[]> {
+  params: ISearchParams,
+  creds: ICredentials,
+  environment?: IEnvironment,
+  fetchExecutor?: IFetchExecutor
+): Promise<IMobileHome[]> {
   return authenticatedRequest(
     token(creds),
     "GET",
@@ -37,12 +37,12 @@ function search(
 }
 
 const homes = (
-  creds: Credentials,
-  environment?: Environment,
-  fetchExecutor?: FetchExecutor
-): RestResource<MobileHome> => ({
-  search: (params: SearchParams) =>
-    search(params, creds, environment, fetchExecutor)
+  creds: ICredentials,
+  Ienvironment?: IEnvironment,
+  fetchExecutor?: IFetchExecutor
+): IRestResource<IMobileHome> => ({
+  search: (params: ISearchParams) =>
+    search(params, creds, Ienvironment, fetchExecutor)
 })
 
 export default homes
