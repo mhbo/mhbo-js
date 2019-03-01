@@ -37,8 +37,14 @@ export interface Credentials {
 }
 
 export interface MobileHome {
-  id: string
-  photos?: string[]
+  address: string
+  askingPrice: number
+  id: number
+  manufacturerName: string
+  modelType: string
+  photoSmall: string
+  rentalPrice: number
+  url: string
 }
 
 export interface RestResource<T> {
