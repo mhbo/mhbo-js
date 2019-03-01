@@ -1,5 +1,5 @@
 import "isomorphic-fetch"
-import { Environment, FetchExecutor } from "./types"
+import { IEnvironment, IFetchExecutor } from "./types"
 
 /**
  * Retrieves the proper base url for the supplied environment.
@@ -7,11 +7,11 @@ import { Environment, FetchExecutor } from "./types"
  * @param {?Environment} environment Used to determine the current base url.
  * @returns {string} A base URL for the supplied environment.
  */
-function baseURL(environment?: Environment): string {
+function baseURL(environment?: IEnvironment): string {
   switch (environment) {
-    case Environment.Development:
+    case IEnvironment.Development:
       return "http://localhost:3000/api/"
-    case Environment.Staging:
+    case IEnvironment.Staging:
       return "https://staging.mhbo.com/api/"
     default:
       return "https://mhbo.com/api/"
@@ -33,10 +33,10 @@ export function authenticatedRequest(
   token: string,
   method: string,
   uri: string,
-  environment?: Environment,
-  fetchExecutor?: FetchExecutor
+  environment?: IEnvironment,
+  fetchExecutor?: IFetchExecutor
 ): Promise<Response> {
-  const request: FetchExecutor = fetchExecutor || fetch
+  const request: IFetchExecutor = fetchExecutor || fetch
   const url = baseURL(environment) + uri
   /* tslint:disable:no-console */
   console.log(`[MHBO-JS] ${method} | ${url}`)
