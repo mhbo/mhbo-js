@@ -69,11 +69,59 @@ curl https://mhbo.com/api/v1/communities/<COMMUNITY_ID> \
 
 #### READ
 
-To read mobilehome listings you have added or can manage make the following request:
+To read mobilehome listings you have added make the following request:
 
 ```
 curl https://mhbo.com/api/v1/mobile_homes \
   -H "Authorization: Bearer <GENERATED_JWT_TOKEN>"
+```
+
+Which will resolve with the following output:
+
+```json
+[
+  {
+    "address": {
+      "id": 1,
+      "number_and_street": "4618 Dick Wilson Road",
+      "city": "Denver",
+      "state": "NC",
+      "zip_code": "28037",
+      "latitude": "35.542743",
+      "longitude": "-80.997491",
+      "created_at": "2012-10-03T16:05:21.000-07:00",
+      "updated_at": "2014-09-28T19:04:08.000-07:00",
+      "lot_num": "",
+      "is_hidden": false,
+      "county": "Lincoln"
+    },
+    "contact": {
+      "id": 1,
+      "name": "Mike Carey",
+      "email": "nccareys3@aol.com",
+      "daytime_phone": "7045350218",
+      "evening_phone": "7042816072",
+      "website": "",
+      "created_at": "2012-12-26T08:25:45.000-08:00",
+      "updated_at": "2013-04-25T11:04:01.000-07:00",
+      "fax": null,
+      "last_name": null,
+      "alt_website": null
+    },
+    "num_bathrooms": 1,
+    "num_bedrooms": 1,
+    "manufacturer_name": "Champion",
+    "asking_price": 35000,
+    "rental_price": null,
+    "model_type": "Double wide",
+    "photos": [
+      {"id": 4782, "url": "https://d3b9rakn43rtha.cloudfront.net/photos/images/005/049/274/large/DSC07672_3_4.jpg"},
+      {"id": 4785, "url": "https://d3b9rakn43rtha.cloudfront.net/photos/images/005/049/274/large/DSC07672_5_6.jpg"}
+    ],
+    "url": "http://localhost:3000/mobile-home/2-4618-dick-wilson-road-denver-nc-28037-double-wide"
+  },
+  ...
+]
 ```
 
 #### CREATE
@@ -84,8 +132,44 @@ To create a new mobile home:
 curl https://mhbo.com/api/v1/mobile_homes \
   -H "Authorization: Bearer <GENERATED_JWT_TOKEN>"
   -X POST
-  -d '{"name":"MY Community"}'
+  -d '{"address":{}, "contact":{}, "num_bathrooms: 1, ...}'
 ```
+
+An acceptable JSON body to POST a new property:
+
+```json
+{
+  "address": {
+    "number_and_street": "4618 Dick Wilson Road",
+    "city": "Denver",
+    "state": "NC",
+    "zip_code": "28037",
+    "lot_num": "",
+    "county": "Lincoln"
+  },
+  "contact": {
+    "name": "Mike Carey",
+    "email": "nccareys3@aol.com",
+    "daytime_phone": "7045350218",
+    "evening_phone": "7042816072",
+    "website": "",
+    "fax": null,
+    "last_name": null,
+    "alt_website": null
+  },
+  "num_bathrooms": 1,
+  "num_bedrooms": 1,
+  "manufacturer_name": "Champion",
+  "asking_price": 35000,
+  "rental_price": null,
+  "model_type": "Double wide",
+  "photos": [
+    "https://d3b9rakn43rtha.cloudfront.net/photos/images/005/049/274/large/DSC07672_3_4.jpg",
+    "https://d3b9rakn43rtha.cloudfront.net/photos/images/005/049/274/large/DSC07672_5_6.jpg"
+  ]
+}
+```
+
 
 #### UPDATE
 
@@ -96,6 +180,41 @@ curl https://mhbo.com/api/v1/mobile_homes/<MOBILE_HOME_ID> \
   -H "Authorization: Bearer <GENERATED_JWT_TOKEN>"
   -X PUT
   -d '{"name":"Mobile Home"}'
+```
+
+An acceptable JSON body to POST a new property:
+
+```json
+{
+  "address": {
+    "number_and_street": "4618 Dick Wilson Road",
+    "city": "Denver",
+    "state": "NC",
+    "zip_code": "28037",
+    "lot_num": "",
+    "county": "Lincoln"
+  },
+  "contact": {
+    "name": "Mike Carey",
+    "email": "nccareys3@aol.com",
+    "daytime_phone": "7045350218",
+    "evening_phone": "7042816072",
+    "website": "",
+    "fax": null,
+    "last_name": null,
+    "alt_website": null
+  },
+  "num_bathrooms": 1,
+  "num_bedrooms": 1,
+  "manufacturer_name": "Champion",
+  "asking_price": 35000,
+  "rental_price": null,
+  "model_type": "Double wide",
+  "photos": [
+    "https://d3b9rakn43rtha.cloudfront.net/photos/images/005/049/274/large/DSC07672_3_4.jpg",
+    "https://d3b9rakn43rtha.cloudfront.net/photos/images/005/049/274/large/DSC07672_5_6.jpg"
+  ]
+}
 ```
 
 ### Leads
