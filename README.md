@@ -227,3 +227,30 @@ To access all available leads in our system available to your company make the f
 curl https://mhbo.com/api/v1/leads \
   -H "Authorization: Bearer <GENERATED_JWT_TOKEN>"
 ```
+
+Which will return output in the following format:
+
+```json
+[
+  {
+    "id": 676,
+    "form": "Acme Leads",
+    "full_name": "Merick Goldman",
+    "email": "redacted@gmail.com",
+    "phone_number": "+14323528961",
+    "min_price": 10000,
+    "max_price": 20000,
+    "address": "Abilene Tx 79606",
+    "latitude": "32.3560371",
+    "longitude": "-99.8348146",
+    "status": false,
+    "mobilehome_id": null,
+    "created_at": "2019-01-24T08:12:43.000-08:00",
+    "updated_at": "2019-01-24T08:12:43.000-08:00",
+    "customer_is_notified": false,
+    "is_email_read": false,
+    "is_enqueued": false
+  },
+  ...
+]
+```
