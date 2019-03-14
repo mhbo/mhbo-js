@@ -43,6 +43,43 @@ curl https://mhbo.com/api/v1/communities \
   -H "Authorization: Bearer <GENERATED_JWT_TOKEN>"
 ```
 
+Which will resolve with the following output:
+
+```json
+[
+  {
+    "id": 379824,
+    "name": "Imperial Manor Mobile Home Park",
+    "address": {
+      "id": 1,
+      "number_and_street": "4618 Dick Wilson Road",
+      "city": "Denver",
+      "state": "NC",
+      "zip_code": "28037",
+      "latitude": "35.542743",
+      "longitude": "-80.997491",
+      "created_at": "2012-10-03T16:05:21.000-07:00",
+      "updated_at": "2014-09-28T19:04:08.000-07:00",
+      "lot_num": "",
+      "is_hidden": false,
+      "county": "Lincoln"
+    },
+    "external_id": null,
+    "source": null,
+    "county": "USA",
+    "county": "Lincoln",
+    "description": "Imperial Manor Mobile Home Park is a manufactured mobile home community.",
+    "is_published": true,
+    "search_priority": null,
+    "num_existing_photos": 1,
+    "featured": false,
+    "created_at": "2012-05-17T15:32:32.000-07:00",
+    "updated_at": "2014-05-08T20:20:37.000-07:00",
+  }
+  ...
+]
+```
+
 #### CREATE
 
 To create a new community:
@@ -51,7 +88,40 @@ To create a new community:
 curl https://mhbo.com/api/v1/communities \
   -H "Authorization: Bearer <GENERATED_JWT_TOKEN>"
   -X POST
-  -d '{"name":"MY Community"}'
+  -d '{"name":"MY Community", address:{}, contact:{}, ...}'
+```
+
+An acceptable format for the JSON body would be as follows:
+
+```json
+{
+  "name": "Imperial Manor Mobile Home Park",
+  "description": "Imperial Manor Mobile Home Park is a manufactured mobile home community.",
+  "external_id": "<An Optional ID Arbitrary to Your Own System>",
+  "address": {
+    "number_and_street": "4618 Dick Wilson Road",
+    "city": "Denver",
+    "state": "NC",
+    "zip_code": "28037",
+    "lot_num": "",
+    "county": "Lincoln"
+  },
+  "country": "USA",
+  "contact": {
+    "name": "Mike Carey",
+    "email": "nccareys3@aol.com",
+    "daytime_phone": "7045350218",
+    "evening_phone": "7042816072",
+    "website": "",
+    "fax": null,
+    "last_name": null,
+    "alt_website": null
+  },
+  "photos": [
+    "https://d3b9rakn43rtha.cloudfront.net/photos/images/005/049/274/large/DSC07672_3_4.jpg",
+    "https://d3b9rakn43rtha.cloudfront.net/photos/images/005/049/274/large/DSC07672_5_6.jpg"
+  ]
+}
 ```
 
 #### UPDATE
@@ -62,7 +132,40 @@ To update a community:
 curl https://mhbo.com/api/v1/communities/<COMMUNITY_ID> \
   -H "Authorization: Bearer <GENERATED_JWT_TOKEN>"
   -X PUT
-  -d '{"name":"MY Community"}'
+  -d '{"name":"MY Community", ...}'
+```
+
+An acceptable format for the JSON body would be as follows:
+
+```json
+{
+  "name": "Imperial Manor Mobile Home Park",
+  "description": "Imperial Manor Mobile Home Park is a manufactured mobile home community.",
+  "external_id": "<An Optional ID Arbitrary to Your Own System>",
+  "address": {
+    "number_and_street": "4618 Dick Wilson Road",
+    "city": "Denver",
+    "state": "NC",
+    "zip_code": "28037",
+    "lot_num": "",
+    "county": "Lincoln"
+  },
+  "country": "USA",
+  "contact": {
+    "name": "Mike Carey",
+    "email": "nccareys3@aol.com",
+    "daytime_phone": "7045350218",
+    "evening_phone": "7042816072",
+    "website": "",
+    "fax": null,
+    "last_name": null,
+    "alt_website": null
+  },
+  "photos": [
+    "https://d3b9rakn43rtha.cloudfront.net/photos/images/005/049/274/large/DSC07672_3_4.jpg",
+    "https://d3b9rakn43rtha.cloudfront.net/photos/images/005/049/274/large/DSC07672_5_6.jpg"
+  ]
+}
 ```
 
 ### Mobilehomes
