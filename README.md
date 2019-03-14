@@ -50,6 +50,7 @@ To create a new community:
 ```
 curl https://mhbo.com/api/v1/communities \
   -H "Authorization: Bearer <GENERATED_JWT_TOKEN>"
+  -X POST
   -d '{"name":"MY Community"}'
 ```
 
@@ -60,6 +61,7 @@ To update a community:
 ```
 curl https://mhbo.com/api/v1/communities/<COMMUNITY_ID> \
   -H "Authorization: Bearer <GENERATED_JWT_TOKEN>"
+  -X PUT
   -d '{"name":"MY Community"}'
 ```
 
@@ -81,6 +83,7 @@ To create a new mobile home:
 ```
 curl https://mhbo.com/api/v1/mobile_homes \
   -H "Authorization: Bearer <GENERATED_JWT_TOKEN>"
+  -X POST
   -d '{"name":"MY Community"}'
 ```
 
@@ -91,6 +94,7 @@ To update a mobile home:
 ```
 curl https://mhbo.com/api/v1/mobile_homes/<MOBILE_HOME_ID> \
   -H "Authorization: Bearer <GENERATED_JWT_TOKEN>"
+  -X PUT
   -d '{"name":"Mobile Home"}'
 ```
 
