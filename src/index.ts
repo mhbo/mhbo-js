@@ -1,7 +1,14 @@
 import { LISTING_TYPES, MODEL_TYPES } from "./constants"
 import homes from "./homes"
 
-import { ICredentials, IEnvironment, IMHBOApiClient } from "./types"
+import {
+  ICredentials,
+  IEnvironment,
+  IListingTypeID,
+  IMHBOApiClient,
+  IModelTypeID,
+  ISellerTypeID
+} from "./types"
 
 /**
  * Initializes a new instance of the MHBO API Client.
@@ -23,6 +30,13 @@ function Client(
 Client.MODEL_TYPES = MODEL_TYPES
 Client.LISTING_TYPES = LISTING_TYPES
 
-export { ICredentials, IEnvironment, IMHBOApiClient }
+export {
+  ICredentials,
+  IEnvironment,
+  IListingTypeID,
+  IMHBOApiClient,
+  IModelTypeID,
+  ISellerTypeID
+}
 
 export default Client
