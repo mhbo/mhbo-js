@@ -4,8 +4,10 @@ import homes from "./homes"
 import {
   ICredentials,
   IEnvironment,
+  IListingTypeID,
   IMHBOApiClient,
-  IMobileHome
+  IModelTypeID,
+  ISellerTypeID
 } from "./types"
 
 /**
@@ -28,6 +30,13 @@ function Client(
 Client.MODEL_TYPES = MODEL_TYPES
 Client.LISTING_TYPES = LISTING_TYPES
 
-export { ICredentials, IEnvironment, IMHBOApiClient, IMobileHome }
+export {
+  ICredentials,
+  IEnvironment,
+  IListingTypeID,
+  IMHBOApiClient,
+  IModelTypeID,
+  ISellerTypeID
+}
 
 export default Client

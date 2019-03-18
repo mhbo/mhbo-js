@@ -4,6 +4,28 @@ export enum IEnvironment {
   Development = "DEVELOPMENT"
 }
 
+export enum IListingTypeID {
+  ForSale = 1,
+  ForRent = 2,
+  ForRentAndToOwn = 3,
+  ForRentOrForSale = 4
+}
+
+export enum IModelTypeID {
+  SingleWide = 1,
+  DoubleWide = 2,
+  TripleWide = 3,
+  ParkModel = 4,
+  Unspecified = 5
+}
+
+export enum ISellerTypeID {
+  Owner = 1,
+  Agent = 2,
+  Dealer = 3,
+  Repo = 4
+}
+
 export interface ICoordinate {
   latitude: number
   longitude: number
@@ -12,18 +34,18 @@ export interface ICoordinate {
 export interface ISearchParams {
   ageRestrictionType?: number
   lenderRepos?: boolean
-  listingTypeIds: number[]
+  listingTypeIds: IListingTypeID[]
   location?: string
   maxPrice?: number
   minPrice?: number
-  modelTypeIds?: number[]
+  modelTypeIds?: IModelTypeID[]
   numBathrooms?: number
   numBedrooms?: number
   openHousesOnly?: boolean
   pageCount?: number
   preOwned?: boolean
   radius?: number
-  sellerTypeIds?: number[]
+  sellerTypeIds?: ISellerTypeID[]
   withBoatStorage?: boolean
   withGolfInCommunity?: boolean
   withOnSiteCustomerService?: boolean
