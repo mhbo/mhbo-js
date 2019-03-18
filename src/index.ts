@@ -6,6 +6,7 @@ import {
   IEnvironment,
   IListingTypeID,
   IMHBOApiClient,
+  IMobileHome,
   IModelTypeID,
   ISellerTypeID
 } from "./types"
@@ -35,6 +36,7 @@ export {
   IEnvironment,
   IListingTypeID,
   IMHBOApiClient,
+  IMobileHome,
   IModelTypeID,
   ISellerTypeID
 }
