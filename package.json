@@ -1,12 +1,12 @@
 {
   "name": "mhbo-js",
-  "version": "1.0.0",
+  "version": "1.0.4",
   "description": "A JS wrapper for interacting with the MHBO API.",
   "main": "lib/index.js",
   "repository": "https://github.com/mhbo/mhbo-js.git",
   "author": "MHBO Inc.",
   "license": "MIT",
-  "private": true,
+  "private": false,
   "files": [
     "lib/**/*"
   ],

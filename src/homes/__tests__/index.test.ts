@@ -1,5 +1,6 @@
 import * as jwt from "jsonwebtoken"
-import { Environment, ListingTypeID } from "../../types"
+
+import { IEnvironment, IListingTypeID } from "../../types"
 import resource from "../index"
 
 const emptyPromise = (val: any) => new Promise((resolve, _) => resolve(val))
@@ -12,7 +13,7 @@ const homes = resource(
     apiAccessKey,
     apiSecret
   },
-  Environment.Development,
+  IEnvironment.Development,
   mockFetch
 )
 
@@ -20,7 +21,7 @@ describe("the homes resource", () => {
   describe("#search", () => {
     beforeEach(() => {
       homes.search({
-        listingTypeIds: [ListingTypeID.ForSale],
+        listingTypeIds: [IListingTypeID.ForSale],
         maxPrice: 100000,
         minPrice: 50000,
         numBathrooms: 2,

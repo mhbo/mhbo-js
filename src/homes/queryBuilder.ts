@@ -1,10 +1,10 @@
 import { snakeCase } from "lodash"
 import * as qs from "querystring"
-import { SearchParams } from "../types"
+import { ISearchParams } from "../types"
 
 // ?is_all_ages=yes&is_senior=yes&max_price=100000&model_type_id%5B%5D=3&model_type_id%5B%5D=4&model_type_id%5B%5D=5&sort=newest-listings&view_type=list
 
-const queryBuilder = (params: SearchParams) => {
+const queryBuilder = (params: ISearchParams) => {
   const query: { [name: string]: any } = Object.assign({}, params)
   return qs
     .stringify(

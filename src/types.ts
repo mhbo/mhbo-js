@@ -1,17 +1,17 @@
-export enum Environment {
+export enum IEnvironment {
   Production = "PRODUCTION",
   Staging = "STAGING",
   Development = "DEVELOPMENT"
 }
 
-export enum ListingTypeID {
+export enum IListingTypeID {
   ForSale = 1,
   ForRent = 2,
   ForRentAndToOwn = 3,
   ForRentOrForSale = 4
 }
 
-export enum ModelTypeID {
+export enum IModelTypeID {
   SingleWide = 1,
   DoubleWide = 2,
   TripleWide = 3,
@@ -19,33 +19,33 @@ export enum ModelTypeID {
   Unspecified = 5
 }
 
-export enum SellerTypeID {
+export enum ISellerTypeID {
   Owner = 1,
   Agent = 2,
   Dealer = 3,
   Repo = 4
 }
 
-export interface Coordinate {
+export interface ICoordinate {
   latitude: number
   longitude: number
 }
 
-export interface SearchParams {
+export interface ISearchParams {
   ageRestrictionType?: number
   lenderRepos?: boolean
-  listingTypeIds: ListingTypeID[]
+  listingTypeIds: IListingTypeID[]
   location?: string
   maxPrice?: number
   minPrice?: number
-  modelTypeIds?: ModelTypeID[]
+  modelTypeIds?: IModelTypeID[]
   numBathrooms?: number
   numBedrooms?: number
   openHousesOnly?: boolean
   pageCount?: number
   preOwned?: boolean
   radius?: number
-  sellerTypeIds?: SellerTypeID[]
+  sellerTypeIds?: ISellerTypeID[]
   withBoatStorage?: boolean
   withGolfInCommunity?: boolean
   withOnSiteCustomerService?: boolean
@@ -53,25 +53,44 @@ export interface SearchParams {
   withTennisInCommunity?: boolean
 }
 
-export interface Credentials {
+export interface ICredentials {
   apiAccessKey: string
   apiSecret: string
 }
 
-export interface MobileHome {
-  id: string
-  photos?: string[]
+export interface IAddress {
+  city: string
+  county: string
+  latitude: number
+  longitude: number
+  lotNum: number
+  numberAndStreet: string
+  state: string
+  zipCode: string
 }
 
-export interface RestResource<T> {
-  search: (params: SearchParams) => Promise<T[]>
+export interface IMobileHome {
+  address: IAddress
+  askingPrice: number
+  id: number
+  latitude: number
+  longitude: number
+  manufacturerName: string
+  modelType: string
+  photoSmall: string
+  rentalPrice: number
+  url: string
 }
 
-export interface MHBOApiClient {
-  homes: RestResource<MobileHome>
+export interface IRestResource<T> {
+  search: (params: ISearchParams) => Promise<T[]>
 }
 
-export type FetchExecutor = (
+export interface IMHBOApiClient {
+  homes: IRestResource<IMobileHome>
+}
+
+export type IFetchExecutor = (
   input: RequestInfo,
   init?: RequestInit
 ) => Promise<Response>
