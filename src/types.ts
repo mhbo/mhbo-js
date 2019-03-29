@@ -59,8 +59,15 @@ export interface ICredentials {
 }
 
 export interface IAddress {
+  addressableId: number
+  addressableType: string
   city: string
   county: string
+  createdAt: string
+  updatedAt: string
+  hasSearchedCoordinates: boolean
+  id: number
+  isHidden: boolean
   latitude: number
   longitude: number
   lotNum: number

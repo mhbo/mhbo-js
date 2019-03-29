@@ -1,3 +1,4 @@
+import { camelizeKeys } from "humps"
 import { authenticatedRequest } from "../requests"
 import { token } from "../token"
 import queryBuilder from "./queryBuilder"
@@ -14,26 +15,30 @@ import {
 /**
  * Performs a search for mobile homes.
  *
- * @param {ICredentials} creds
- * @param {?IEnvironment} environment,
- * @param {?IFetchExecutor} fetchExecutor
- * @returns {Promise<MobileHome[]>}
+ * @param creds The authentication credential for the API request.
+ * @param environment An optional override of the environment to utilize.
+ * @param fetchExecutor An instance of the request executor.
+ * @returns An array of mobile home results.
  */
-function search(
+async function search(
   params: ISearchParams,
   creds: ICredentials,
   environment?: IEnvironment,
   fetchExecutor?: IFetchExecutor
 ): Promise<IMobileHome[]> {
-  return authenticatedRequest(
+  const response = await authenticatedRequest(
     token(creds),
     "GET",
     `v1/mobile_homes/?${queryBuilder(params)}`,
     environment,
     fetchExecutor
   )
-    .then((response: Response) => response.json())
-    .then((json: any) => json || [])
+  const json = await response.json()
+  return (
+    json.map(
+      (result: any): IMobileHome => camelizeKeys(result) as IMobileHome
+    ) || []
+  )
 }
 
 const homes = (

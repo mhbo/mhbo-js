@@ -27,13 +27,20 @@ describe("the MHBO API Client", () => {
     expect(ISellerTypeID.Repo).toBeDefined()
     const mobileHome: IMobileHome = {
       address: {
+        addressableId: 123,
+        addressableType: "MobileHome",
         city: "Portland",
         county: "Multnomah",
+        createdAt: "",
+        hasSearchedCoordinates: false,
+        id: 12345,
+        isHidden: false,
         latitude: -45.51,
         longitude: -122.65,
         lotNum: 0,
         numberAndStreet: "555 SE Belmont",
         state: "OR",
+        updatedAt: "",
         zipCode: "97214"
       },
       askingPrice: 500,
