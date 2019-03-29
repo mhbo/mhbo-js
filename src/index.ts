@@ -1,5 +1,5 @@
 import { LISTING_TYPES, MODEL_TYPES } from "./constants"
-import homes from "./homes"
+import homes from "./homes/index"
 
 import {
   ICredentials,
