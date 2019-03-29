@@ -2,10 +2,11 @@
   "compilerOptions": {
     "target": "es2015",
     "lib": ["es2015", "es2017", "dom"],
-    "module": "commonjs",
+    "module": "esnext",
     "declaration": true,
     "outDir": "./lib",
-    "strict": true
+    "strict": true,
+    "types": ["jest"],
   },
   "include": ["src"],
   "exclude": ["node_modules", "__tests__", "**/__tests__/*"]
