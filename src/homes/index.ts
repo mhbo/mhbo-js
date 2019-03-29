@@ -1,3 +1,4 @@
+import { camelizeKeys } from "humps"
 import { authenticatedRequest } from "../requests"
 import { token } from "../token"
 import queryBuilder from "./queryBuilder"
@@ -33,7 +34,12 @@ function search(
     fetchExecutor
   )
     .then((response: Response) => response.json())
-    .then((json: any) => json || [])
+    .then(
+      (json: any) =>
+        json.map(
+          (result: any): IMobileHome => camelizeKeys(result) as IMobileHome
+        ) || []
+    )
 }
 
 const homes = (
