@@ -59,33 +59,32 @@ export interface ICredentials {
 }
 
 export interface IAddress {
-  addressableId: number
-  addressableType: string
+  addressable_id: number
+  addressable_type: string
   city: string
   county: string
-  createdAt: string
-  updatedAt: string
-  hasSearchedCoordinates: boolean
+  created_at: string
+  has_searched_coordinates: boolean
   id: number
-  isHidden: boolean
-  latitude: number
-  longitude: number
-  lotNum: number
-  numberAndStreet: string
+  is_hidden: boolean
+  latitude: string
+  longitude: string
+  lot_num: number | null
+  number_and_street: string
   state: string
-  zipCode: string
+  updated_at: string
+  zip_code: string
 }
 
 export interface IMobileHome {
   address: IAddress
-  askingPrice: number
-  id: number
-  latitude: number
-  longitude: number
-  manufacturerName: string
-  modelType: string
-  photoSmall: string
-  rentalPrice: number
+  asking_price: number
+  manufacturer_name: string
+  model_type: string
+  num_bathrooms: number
+  num_bedrooms: number
+  photo_small: string
+  rental_price: number | null
   url: string
 }
 
