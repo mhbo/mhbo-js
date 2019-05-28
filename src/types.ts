@@ -89,6 +89,19 @@ export interface IMobileHome {
   url: string
 }
 
+export interface IUnparsedMobileHome {
+  address: IAddress
+  askingPrice: number
+  id: number
+  latitude: string
+  longitude: string
+  manufacturerName: string
+  modelType: string
+  photoSmall: string
+  rentalPrice: number
+  url: string
+}
+
 export interface IRestResource<T> {
   search: (params: ISearchParams) => Promise<T[]>
 }
