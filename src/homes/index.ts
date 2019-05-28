@@ -38,8 +38,14 @@ async function search(
   return (
     json.map(
       (result: any): IMobileHome => {
-        const { latitude, longitude, ...home } = camelizeKeys(result) as IUnparsedMobileHome
-        return { ...home, latitude: parseFloat(latitude), longitude: parseFloat(longitude) } as IMobileHome
+        const { latitude, longitude, ...home } = camelizeKeys(
+          result
+        ) as IUnparsedMobileHome
+        return {
+          ...home,
+          latitude: parseFloat(latitude),
+          longitude: parseFloat(longitude)
+        } as IMobileHome
       }
     ) || []
   )
