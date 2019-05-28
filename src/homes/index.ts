@@ -9,7 +9,8 @@ import {
   IFetchExecutor,
   IMobileHome,
   IRestResource,
-  ISearchParams
+  ISearchParams,
+  IUnparsedMobileHome
 } from "../types"
 
 /**
@@ -36,7 +37,16 @@ async function search(
   const json = await response.json()
   return (
     json.map(
-      (result: any): IMobileHome => camelizeKeys(result) as IMobileHome
+      (result: any): IMobileHome => {
+        const { latitude, longitude, ...home } = camelizeKeys(
+          result
+        ) as IUnparsedMobileHome
+        return {
+          ...home,
+          latitude: parseFloat(latitude),
+          longitude: parseFloat(longitude)
+        } as IMobileHome
+      }
     ) || []
   )
 }
