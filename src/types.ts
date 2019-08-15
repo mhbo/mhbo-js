@@ -84,7 +84,7 @@ export interface IMobileHome {
   longitude: number
   manufacturerName: string
   modelType: string
-  photoSmall: string
+  photoLarge: string
   rentalPrice: number
   url: string
 }
@@ -97,7 +97,7 @@ export interface IUnparsedMobileHome {
   longitude: string
   manufacturerName: string
   modelType: string
-  photoSmall: string
+  photoLarge: string
   rentalPrice: number
   url: string
 }
