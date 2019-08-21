@@ -50,6 +50,7 @@ describe("the MHBO API Client", () => {
       manufacturerName: "Craftsman",
       modelType: IModelTypeID.SingleWide.toString(),
       photoLarge: "",
+      photoSmall: "",
       rentalPrice: 0,
       url: "https://mhbo.com/mobilehomes/"
     }
