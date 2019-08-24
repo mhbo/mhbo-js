@@ -49,6 +49,7 @@ describe("the MHBO API Client", () => {
       longitude: -122.65,
       manufacturerName: "Craftsman",
       modelType: IModelTypeID.SingleWide.toString(),
+      photoLarge: "",
       photoSmall: "",
       rentalPrice: 0,
       url: "https://mhbo.com/mobilehomes/"
