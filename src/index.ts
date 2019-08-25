@@ -1,7 +1,8 @@
-import { LISTING_TYPES, MODEL_TYPES } from "./constants"
+import { HOME_TYPE, LISTING_TYPES, MODEL_TYPES } from "./constants"
 import homes from "./homes/index"
 
 import {
+  ICommunity,
   ICredentials,
   IEnvironment,
   IListingTypeID,
@@ -30,6 +31,7 @@ function Client(
 
 Client.MODEL_TYPES = MODEL_TYPES
 Client.LISTING_TYPES = LISTING_TYPES
+Client.HOME_TYPE = HOME_TYPE
 
 export {
   ICredentials,
@@ -37,6 +39,7 @@ export {
   IListingTypeID,
   IMHBOApiClient,
   IMobileHome,
+  ICommunity,
   IModelTypeID,
   ISellerTypeID
 }

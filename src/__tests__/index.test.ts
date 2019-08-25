@@ -51,6 +51,7 @@ describe("the MHBO API Client", () => {
       modelType: IModelTypeID.SingleWide.toString(),
       photoLarge: "",
       photoSmall: "",
+      photoLarge: "",
       rentalPrice: 0,
       url: "https://mhbo.com/mobilehomes/"
     }

@@ -4,12 +4,14 @@ import { token } from "../token"
 import queryBuilder from "./queryBuilder"
 
 import {
+  ICommunity,
   ICredentials,
   IEnvironment,
   IFetchExecutor,
   IMobileHome,
   IRestResource,
   ISearchParams,
+  IUnparsedCommunity,
   IUnparsedMobileHome
 } from "../types"
 
@@ -26,36 +28,53 @@ async function search(
   creds: ICredentials,
   environment?: IEnvironment,
   fetchExecutor?: IFetchExecutor
-): Promise<IMobileHome[]> {
+): Promise<IMobileHome[] | ICommunity[]> {
   const response = await authenticatedRequest(
     token(creds),
     "GET",
-    `v1/mobile_homes/?${queryBuilder(params)}`,
+    `v1/${
+      params.homeTypeId !== 2 ? `mobile_homes` : `communities`
+    }/?${queryBuilder(params)}`,
     environment,
     fetchExecutor
   )
   const json = await response.json()
-  return (
-    json.map(
-      (result: any): IMobileHome => {
-        const { latitude, longitude, ...home } = camelizeKeys(
-          result
-        ) as IUnparsedMobileHome
-        return {
-          ...home,
-          latitude: parseFloat(latitude),
-          longitude: parseFloat(longitude)
-        } as IMobileHome
-      }
-    ) || []
-  )
+  if (params.homeTypeId !== 2) {
+    return (
+      json.map(
+        (result: any): IMobileHome => {
+          const { latitude, longitude, ...home } = camelizeKeys(
+            result
+          ) as IUnparsedMobileHome
+          return {
+            ...home,
+            isCommunity: false,
+            latitude: parseFloat(latitude),
+            longitude: parseFloat(longitude)
+          } as IMobileHome
+        }
+      ) || []
+    )
+  } else {
+    return (
+      json.map(
+        (result: any): ICommunity => {
+          const { ...home } = camelizeKeys(result) as IUnparsedCommunity
+          return {
+            ...home,
+            isCommunity: true
+          } as ICommunity
+        }
+      ) || []
+    )
+  }
 }
 
 const homes = (
   creds: ICredentials,
   Ienvironment?: IEnvironment,
   fetchExecutor?: IFetchExecutor
-): IRestResource<IMobileHome> => ({
+): IRestResource<IMobileHome | ICommunity> => ({
   search: (params: ISearchParams) =>
     search(params, creds, Ienvironment, fetchExecutor)
 })

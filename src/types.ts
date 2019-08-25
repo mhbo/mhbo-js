@@ -31,6 +31,11 @@ export interface ICoordinate {
   longitude: number
 }
 
+export enum IHomeTypeID {
+  Community = 2,
+  MobileHome = 1
+}
+
 export interface ISearchParams {
   ageRestrictionType?: number
   lenderRepos?: boolean
@@ -51,6 +56,7 @@ export interface ISearchParams {
   withOnSiteCustomerService?: boolean
   withRvParking?: boolean
   withTennisInCommunity?: boolean
+  homeTypeId: IHomeTypeID
 }
 
 export interface ICredentials {
@@ -80,6 +86,7 @@ export interface IMobileHome {
   address: IAddress
   askingPrice: number
   id: number
+  isCommunity: boolean
   latitude: number
   longitude: number
   manufacturerName: string
@@ -98,8 +105,44 @@ export interface IUnparsedMobileHome {
   longitude: string
   manufacturerName: string
   modelType: string
+  photoSmall: string
   photoLarge: string
   rentalPrice: number
+  url: string
+}
+
+export interface ICommunity {
+  address: IAddress
+  askingPrice: number
+  country: string
+  county: string
+  createdAt: string
+  description: string
+  featured: boolean
+  id: number
+  isCommunity: boolean
+  isPublished: boolean
+  numExistingPhotos: number
+  photoLarge: string
+  source: string
+  updatedAt: string
+  url: string
+}
+
+export interface IUnparsedCommunity {
+  address: IAddress
+  askingPrice: number
+  country: string
+  county: string
+  createdAt: string
+  description: string
+  featured: boolean
+  id: number
+  isPublished: boolean
+  numExistingPhotos: number
+  photoLarge: string
+  source: string
+  updatedAt: string
   url: string
 }
 
@@ -108,7 +151,7 @@ export interface IRestResource<T> {
 }
 
 export interface IMHBOApiClient {
-  homes: IRestResource<IMobileHome>
+  homes: IRestResource<IMobileHome | ICommunity>
 }
 
 export type IFetchExecutor = (

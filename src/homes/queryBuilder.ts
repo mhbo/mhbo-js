@@ -11,6 +11,7 @@ const queryBuilder = (params: ISearchParams) => {
       Object.keys(query)
         .filter(k => typeof query[k] !== undefined)
         .filter(k => query[k] !== "")
+        .filter(k => k !== "homeTypeId")
         .reduce(
           (p, k) => Object.assign({}, p, { [snakeCase(k)]: query[k] }),
           {}
