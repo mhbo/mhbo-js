@@ -1,3 +1,5 @@
+import communities from "./communities"
+
 export enum IEnvironment {
   Production = "PRODUCTION",
   Staging = "STAGING",
@@ -39,7 +41,7 @@ export enum IHomeTypeID {
 export interface ISearchParams {
   ageRestrictionType?: number
   lenderRepos?: boolean
-  listingTypeIds: IListingTypeID[]
+  listingTypeIds?: IListingTypeID[]
   location?: string
   maxPrice?: number
   minPrice?: number
@@ -76,7 +78,7 @@ export interface IAddress {
   isHidden: boolean
   latitude: number
   longitude: number
-  lotNum: number
+  lotNum: number | null
   numberAndStreet: string
   state: string
   zipCode: string
@@ -113,15 +115,15 @@ export interface IUnparsedMobileHome {
 
 export interface ICommunity {
   address: IAddress
-  askingPrice: number
-  country: string
+  country: string | null
   county: string
   createdAt: string
-  description: string
+  description: string | null
   featured: boolean
   id: number
   isCommunity: boolean
   isPublished: boolean
+  name: string
   numExistingPhotos: number
   photoLarge: string
   source: string
@@ -131,11 +133,10 @@ export interface ICommunity {
 
 export interface IUnparsedCommunity {
   address: IAddress
-  askingPrice: number
-  country: string
+  country: string | null
   county: string
   createdAt: string
-  description: string
+  description: string | null
   featured: boolean
   id: number
   isPublished: boolean
@@ -151,7 +152,8 @@ export interface IRestResource<T> {
 }
 
 export interface IMHBOApiClient {
-  homes: IRestResource<IMobileHome | ICommunity>
+  homes: IRestResource<IMobileHome>
+  communities: IRestResource<ICommunity>
 }
 
 export type IFetchExecutor = (

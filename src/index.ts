@@ -1,3 +1,4 @@
+import communities from "./communities/index"
 import { HOME_TYPE, LISTING_TYPES, MODEL_TYPES } from "./constants"
 import homes from "./homes/index"
 
@@ -26,7 +27,10 @@ function Client(
   environment?: IEnvironment
 ): IMHBOApiClient {
   const creds: ICredentials = { apiAccessKey, apiSecret }
-  return { homes: homes(creds, environment) }
+  return {
+    communities: communities(creds, environment),
+    homes: homes(creds, environment)
+  }
 }
 
 Client.MODEL_TYPES = MODEL_TYPES

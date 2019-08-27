@@ -4,13 +4,13 @@ import { token } from "../token"
 import queryBuilder from "./queryBuilder"
 
 import {
+  ICommunity,
   ICredentials,
   IEnvironment,
   IFetchExecutor,
-  IMobileHome,
   IRestResource,
   ISearchParams,
-  IUnparsedMobileHome
+  IUnparsedCommunity
 } from "../types"
 
 /**
@@ -26,39 +26,35 @@ async function search(
   creds: ICredentials,
   environment?: IEnvironment,
   fetchExecutor?: IFetchExecutor
-): Promise<IMobileHome[]> {
+): Promise<ICommunity[]> {
   const response = await authenticatedRequest(
     token(creds),
     "GET",
-    `v1/mobile_homes/?${queryBuilder(params)}`,
+    `v1/communities/?${queryBuilder(params)}`,
     environment,
     fetchExecutor
   )
   const json = await response.json()
   return (
     json.map(
-      (result: any): IMobileHome => {
-        const { latitude, longitude, ...home } = camelizeKeys(
-          result
-        ) as IUnparsedMobileHome
+      (result: any): ICommunity => {
+        const { ...community } = camelizeKeys(result) as IUnparsedCommunity
         return {
-          ...home,
-          isCommunity: false,
-          latitude: parseFloat(latitude),
-          longitude: parseFloat(longitude)
-        } as IMobileHome
+          ...community,
+          isCommunity: true
+        } as ICommunity
       }
     ) || []
   )
 }
 
-const homes = (
+const communities = (
   creds: ICredentials,
   Ienvironment?: IEnvironment,
   fetchExecutor?: IFetchExecutor
-): IRestResource<IMobileHome> => ({
+): IRestResource<ICommunity> => ({
   search: (params: ISearchParams) =>
     search(params, creds, Ienvironment, fetchExecutor)
 })
 
-export default homes
+export default communities
