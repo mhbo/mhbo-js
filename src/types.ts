@@ -84,11 +84,15 @@ export interface IAddress {
   zipCode: string
 }
 
-export interface IMobileHome {
+export interface IMHBOListing {
   address: IAddress
-  askingPrice: number
   id: number
   isCommunity: boolean
+  url: string
+}
+
+export interface IMobileHome extends IMHBOListing {
+  askingPrice: number
   latitude: number
   longitude: number
   manufacturerName: string
@@ -96,7 +100,6 @@ export interface IMobileHome {
   photoSmall: string
   photoLarge: string
   rentalPrice: number
-  url: string
 }
 
 export interface IUnparsedMobileHome {
@@ -113,22 +116,16 @@ export interface IUnparsedMobileHome {
   url: string
 }
 
-export interface ICommunity {
-  address: IAddress
-  country: string | null
-  county: string
+export interface ICommunity extends IMHBOListing {
   createdAt: string
   description: string | null
   featured: boolean
-  id: number
-  isCommunity: boolean
   isPublished: boolean
   name: string
   numExistingPhotos: number
   photoLarge: string
   source: string
   updatedAt: string
-  url: string
 }
 
 export interface IUnparsedCommunity {
@@ -140,6 +137,7 @@ export interface IUnparsedCommunity {
   featured: boolean
   id: number
   isPublished: boolean
+  name: string
   numExistingPhotos: number
   photoLarge: string
   source: string
