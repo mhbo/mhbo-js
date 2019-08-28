@@ -79,8 +79,6 @@ describe("the MHBO API Client", () => {
         updatedAt: "2014-10-07T20:51:18.000-07:00",
         zipCode: "75501"
       },
-      country: null,
-      county: "Bowie County",
       createdAt: "2013-02-05T14:26:21.000-08:00",
       description: null,
       featured: false,
