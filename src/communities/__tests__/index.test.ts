@@ -8,7 +8,7 @@ const mockFetch = jest.fn(() => emptyPromise(emptyPromise({})))
 const apiAccessKey = "TestID"
 const apiSecret = "TestSecret"
 
-const homes = resource(
+const communities = resource(
   {
     apiAccessKey,
     apiSecret
@@ -17,16 +17,11 @@ const homes = resource(
   mockFetch
 )
 
-describe("the homes resource", () => {
+describe("the communities resource", () => {
   describe("#search", () => {
     beforeEach(() => {
-      homes.search({
-        homeTypeId: 1,
-        listingTypeIds: [IListingTypeID.ForSale],
-        maxPrice: 100000,
-        minPrice: 50000,
-        numBathrooms: 2,
-        numBedrooms: 3
+      communities.search({
+        homeTypeId: 2
       })
     })
 
@@ -36,7 +31,7 @@ describe("the homes resource", () => {
 
     it("should call the search endpoint", () => {
       expect(mockFetch.mock.calls[0][0]).toBe(
-        "http://localhost:3000/api/v1/mobile_homes/?listing_type_id%5B%5D=1&max_price=100000&min_price=50000&num_bathrooms%5B%5D=2&num_bedrooms%5B%5D=3"
+        "http://localhost:3000/api/v1/communities/?"
       )
     })
 

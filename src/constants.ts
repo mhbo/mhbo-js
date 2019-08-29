@@ -11,3 +11,8 @@ export const LISTING_TYPES = {
   FOR_RENT: 2,
   FOR_RENT_TO_OWN: 3
 }
+
+export const HOME_TYPE = {
+  COMMUNITY: 2,
+  MOBILE_HOME: 1
+}

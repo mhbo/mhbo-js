@@ -1,3 +1,5 @@
+import communities from "./communities"
+
 export enum IEnvironment {
   Production = "PRODUCTION",
   Staging = "STAGING",
@@ -31,10 +33,15 @@ export interface ICoordinate {
   longitude: number
 }
 
+export enum IHomeTypeID {
+  Community = 2,
+  MobileHome = 1
+}
+
 export interface ISearchParams {
   ageRestrictionType?: number
   lenderRepos?: boolean
-  listingTypeIds: IListingTypeID[]
+  listingTypeIds?: IListingTypeID[]
   location?: string
   maxPrice?: number
   minPrice?: number
@@ -51,6 +58,7 @@ export interface ISearchParams {
   withOnSiteCustomerService?: boolean
   withRvParking?: boolean
   withTennisInCommunity?: boolean
+  homeTypeId: IHomeTypeID
 }
 
 export interface ICredentials {
@@ -70,16 +78,21 @@ export interface IAddress {
   isHidden: boolean
   latitude: number
   longitude: number
-  lotNum: number
+  lotNum: number | null
   numberAndStreet: string
   state: string
   zipCode: string
 }
 
-export interface IMobileHome {
+export interface IMHBOListing {
   address: IAddress
-  askingPrice: number
   id: number
+  isCommunity: boolean
+  url: string
+}
+
+export interface IMobileHome extends IMHBOListing {
+  askingPrice: number
   latitude: number
   longitude: number
   manufacturerName: string
@@ -87,7 +100,6 @@ export interface IMobileHome {
   photoSmall: string
   photoLarge: string
   rentalPrice: number
-  url: string
 }
 
 export interface IUnparsedMobileHome {
@@ -98,8 +110,38 @@ export interface IUnparsedMobileHome {
   longitude: string
   manufacturerName: string
   modelType: string
+  photoSmall: string
   photoLarge: string
   rentalPrice: number
+  url: string
+}
+
+export interface ICommunity extends IMHBOListing {
+  createdAt: string
+  description: string | null
+  featured: boolean
+  isPublished: boolean
+  name: string
+  numExistingPhotos: number
+  photoLarge: string
+  source: string
+  updatedAt: string
+}
+
+export interface IUnparsedCommunity {
+  address: IAddress
+  country: string | null
+  county: string
+  createdAt: string
+  description: string | null
+  featured: boolean
+  id: number
+  isPublished: boolean
+  name: string
+  numExistingPhotos: number
+  photoLarge: string
+  source: string
+  updatedAt: string
   url: string
 }
 
@@ -109,6 +151,7 @@ export interface IRestResource<T> {
 
 export interface IMHBOApiClient {
   homes: IRestResource<IMobileHome>
+  communities: IRestResource<ICommunity>
 }
 
 export type IFetchExecutor = (
