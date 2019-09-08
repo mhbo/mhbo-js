@@ -8,6 +8,7 @@ import {
   IEnvironment,
   IListingTypeID,
   IMHBOApiClient,
+  IMHBOListing,
   IMobileHome,
   IModelTypeID,
   ISellerTypeID
@@ -45,7 +46,8 @@ export {
   IMobileHome,
   ICommunity,
   IModelTypeID,
-  ISellerTypeID
+  ISellerTypeID,
+  IMHBOListing
 }
 
 export default Client

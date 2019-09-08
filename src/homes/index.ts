@@ -38,14 +38,19 @@ async function search(
   return (
     json.map(
       (result: any): IMobileHome => {
-        const { latitude, longitude, ...home } = camelizeKeys(
-          result
-        ) as IUnparsedMobileHome
+        const home = camelizeKeys(result) as IUnparsedMobileHome
+        const { address } = home
+        const { latitude, longitude, lotNum } = address
         return {
           ...home,
-          isCommunity: false,
-          latitude: parseFloat(latitude),
-          longitude: parseFloat(longitude)
+          address: {
+            ...address,
+            latitude: parseFloat(latitude),
+            longitude: parseFloat(longitude),
+            lotNum: lotNum === null ? lotNum : parseFloat(lotNum)
+          },
+          id: address.id,
+          isCommunity: false
         } as IMobileHome
       }
     ) || []
