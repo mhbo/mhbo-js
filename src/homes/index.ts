@@ -49,7 +49,6 @@ async function search(
             longitude: parseFloat(longitude),
             lotNum: lotNum === null ? lotNum : parseFloat(lotNum)
           },
-          id: address.id,
           isCommunity: false
         } as IMobileHome
       }
