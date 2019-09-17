@@ -39,8 +39,15 @@ async function search(
     json.map(
       (result: any): ICommunity => {
         const { ...community } = camelizeKeys(result) as IUnparsedCommunity
+        const { address } = community
+        const { latitude, longitude } = address
         return {
           ...community,
+          address: {
+            ...address,
+            latitude: parseFloat(latitude),
+            longitude: parseFloat(longitude)
+          },
           isCommunity: true
         } as ICommunity
       }
