@@ -32,67 +32,73 @@ describe("the MHBO API Client", () => {
     expect(IHomeTypeID.Community).toBeDefined()
     const mobileHome: IMobileHome = {
       address: {
-        addressableId: 123,
-        addressableType: "MobileHome",
-        city: "Portland",
-        county: "Multnomah",
-        createdAt: "",
+        addressableId: 198718,
+        addressableType: "Mobilehome",
+        city: "Lady Lake",
+        county: "Lake",
+        createdAt: "2019-06-30T15:52:24.000-07:00",
         hasSearchedCoordinates: false,
-        id: 12345,
+        id: 719739,
         isHidden: false,
-        latitude: -45.51,
-        longitude: -122.65,
-        lotNum: 0,
-        numberAndStreet: "555 SE Belmont",
-        state: "OR",
-        updatedAt: "",
-        zipCode: "97214"
+        latitude: 28.9221659,
+        longitude: -81.921264,
+        lotNum: 2121,
+        numberAndStreet: "604 Nicklaus Court",
+        state: "FL",
+        updatedAt: "2019-08-16T01:49:13.000-07:00",
+        zipCode: "32159"
       },
-      askingPrice: 500,
-      id: 123,
+      askingPrice: 124995,
+      featured: false,
+      id: 719739,
       isCommunity: false,
-      latitude: -45.51,
-      longitude: -122.65,
-      manufacturerName: "Craftsman",
-      modelType: IModelTypeID.SingleWide.toString(),
-      photoLarge: "",
+      manufacturerName: "Skyline",
+      modelType: "Double wide",
+      numBathrooms: 2,
+      numBedrooms: 3,
+      photoLarge:
+        "https://www.suncommunities.com/wp-content/uploads/2017/11/01-Field-Cape-Coral.jpg",
       photoSmall: "",
-      rentalPrice: 0,
-      url: "https://mhbo.com/mobilehomes/"
+      rentalPrice: null,
+      url:
+        "http://staging.mhbo.com/mobile-home/198718-604-nicklaus-court-lot-2121-lady-lake-fl-32159-double-wide"
     }
     expect(mobileHome).toBeDefined()
     const community: ICommunity = {
       address: {
-        addressableId: 8490,
+        addressableId: 37475,
         addressableType: "Community",
-        city: "Texarkana",
-        county: "Bowie",
-        createdAt: "2013-02-05T14:26:21.000-08:00",
-        hasSearchedCoordinates: true,
-        id: 134932,
+        city: "Lady Lake",
+        county: "Lake",
+        createdAt: "2019-09-07T23:53:32.000-07:00",
+        hasSearchedCoordinates: false,
+        id: 722911,
         isHidden: false,
-        latitude: 33.4174897,
-        longitude: -94.1059232,
+        latitude: 28.92363,
+        longitude: -81.924338,
         lotNum: null,
-        numberAndStreet: "200 Parkview Dr",
-        state: "TX",
-        updatedAt: "2014-10-07T20:51:18.000-07:00",
-        zipCode: "75501"
+        numberAndStreet: "106 Evergreen Lane",
+        state: "FL",
+        updatedAt: "2019-09-07T23:53:32.000-07:00",
+        zipCode: "32159"
       },
-      createdAt: "2013-02-05T14:26:21.000-08:00",
-      description: null,
-      featured: false,
-      id: 8490,
+      createdAt: "2013-09-22T03:27:48.000-07:00",
+      description:
+        "<p>Water Oak Country Club Estates is a gated, age-restricted (55+) manufactured home community located in Lady Lake, FL. Located conveniently off US 27 between Leesburg and Ocala, it is only one hour north of Orlando. Featuring 300 acres of rolling hills, trees, lakes and winding roads invite residents to walk, jog, bike ride, or take a leisurely stroll during the day. Mornings on the tennis court or golf course; afternoons exploring the area and its unique shops; evenings playing cards, bingo or shooting a game of pool - no matter what you might enjoy doing, Water Oak Country Club Estates provides for an incredible and active retirement lifestyle. Managed on-site by Sun Communities, Water Oak Country Club offers a friendly and comfortable resort-style living experience at low cost.To learn more—Call (888) 600-9798—or just drop by for a visit and a tour.</p>",
+      featured: true,
+      id: 37475,
       isCommunity: true,
+      isDealer: false,
       isPublished: true,
-      name: "Park View Mobile Home Park",
-      numExistingPhotos: 1,
+      minSalePrice: 35995,
+      name: "Water Oak Country Club",
+      numExistingPhotos: 20,
       photoLarge:
-        "http://dth4n83exov4m.cloudfront.net/photos/images/000/078/690/large/200-parkview-dr-texarkana-tx-75501.?1488031506",
-      source: "scrapinghub",
-      updatedAt: "2014-05-08T23:01:25.000-07:00",
+        "http://dth4n83exov4m.cloudfront.net/photos/images/004/371/787/large/water-oak-country-club-5.jpg?1555695939",
+      source: "suncommunities",
+      updatedAt: "2019-09-08T02:22:46.000-07:00",
       url:
-        "http://staging.mhbo.com/mobile-home-park/8490-park-view-mobile-home-park-200-parkview-dr-texarkana-tx-75501"
+        "http://staging.mhbo.com/mobile-home-park/37475-water-oak-country-club-106-evergreen-lane-lady-lake-fl-32159"
     }
     expect(community).toBeDefined()
   })

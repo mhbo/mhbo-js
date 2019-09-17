@@ -66,6 +66,24 @@ export interface ICredentials {
   apiSecret: string
 }
 
+export interface IUnparsedAddress {
+  addressableId: number
+  addressableType: string
+  city: string
+  county: string
+  createdAt: string
+  updatedAt: string
+  hasSearchedCoordinates: boolean
+  id: number
+  isHidden: boolean
+  latitude: string
+  longitude: string
+  lotNum: string | null
+  numberAndStreet: string
+  state: string
+  zipCode: string
+}
+
 export interface IAddress {
   addressableId: number
   addressableType: string
@@ -91,29 +109,37 @@ export interface IMHBOListing {
   url: string
 }
 
+export interface IUnparsedMHBOListing {
+  address: IUnparsedAddress
+  id: number
+  isCommunity: boolean
+  url: string
+}
+
 export interface IMobileHome extends IMHBOListing {
+  askingPrice: number
+  featured: boolean
+  manufacturerName: string
+  modelType: string
+  numBathrooms: number
+  numBedrooms: number
+  photoSmall: string
+  photoLarge: string
+  rentalPrice: number | null
+}
+
+export interface IUnparsedMobileHome extends IUnparsedMHBOListing {
   askingPrice: number
   latitude: number
   longitude: number
+  featured: boolean
   manufacturerName: string
   modelType: string
+  numBathrooms: number
+  numBedrooms: number
   photoSmall: string
   photoLarge: string
-  rentalPrice: number
-}
-
-export interface IUnparsedMobileHome {
-  address: IAddress
-  askingPrice: number
-  id: number
-  latitude: string
-  longitude: string
-  manufacturerName: string
-  modelType: string
-  photoSmall: string
-  photoLarge: string
-  rentalPrice: number
-  url: string
+  rentalPrice: number | null
 }
 
 export interface ICommunity extends IMHBOListing {
@@ -121,6 +147,8 @@ export interface ICommunity extends IMHBOListing {
   description: string | null
   featured: boolean
   isPublished: boolean
+  isDealer: boolean
+  minSalePrice: null | number
   name: string
   numExistingPhotos: number
   photoLarge: string
@@ -128,21 +156,18 @@ export interface ICommunity extends IMHBOListing {
   updatedAt: string
 }
 
-export interface IUnparsedCommunity {
-  address: IAddress
-  country: string | null
-  county: string
+export interface IUnparsedCommunity extends IUnparsedMHBOListing {
   createdAt: string
   description: string | null
   featured: boolean
-  id: number
   isPublished: boolean
+  isDealer: boolean
+  minSalePrice: null | number
   name: string
   numExistingPhotos: number
   photoLarge: string
   source: string
   updatedAt: string
-  url: string
 }
 
 export interface IRestResource<T> {
