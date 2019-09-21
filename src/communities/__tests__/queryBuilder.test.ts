@@ -1,12 +1,20 @@
 import queryBuilder from "../queryBuilder"
 
 describe("the query builder", () => {
-  it("should map all attributes as an appropriate query string", () => {
+  it("should map all attributes as an appropriate query string for full detail level", () => {
     const query = queryBuilder({
       homeTypeId: 2,
       location: "Mesa, AZ"
     })
     expect(query).toEqual("display_location=Mesa%2C%20AZ")
+  })
+
+  it("should map all attributes as an appropriate query string for summary detail level", () => {
+    const query = queryBuilder({
+      homeTypeId: 2,
+      listingIds: [1234, 3456]
+    })
+    expect(query).toEqual("1234,3456&")
   })
 
   it("should omit blank attributes as an appropriate query string", () => {

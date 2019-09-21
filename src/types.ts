@@ -13,6 +13,12 @@ export enum IListingTypeID {
   ForRentOrForSale = 4
 }
 
+export enum IEntityType {
+  Home = 1,
+  Community = 2,
+  Dealer = 3
+}
+
 export enum IModelTypeID {
   SingleWide = 1,
   DoubleWide = 2,
@@ -59,6 +65,8 @@ export interface ISearchParams {
   withRvParking?: boolean
   withTennisInCommunity?: boolean
   homeTypeId: IHomeTypeID
+  listingIds?: number[]
+  detailLevel?: "SUMMARY" | "FULL"
 }
 
 export interface ICredentials {
@@ -105,14 +113,16 @@ export interface IAddress {
 export interface IMHBOListing {
   address: IAddress
   id: number
-  isCommunity: boolean
+  entityType: IEntityType
+  listingTypeId?: IListingTypeID
   url: string
 }
 
 export interface IUnparsedMHBOListing {
   address: IUnparsedAddress
   id: number
-  isCommunity: boolean
+  entityType: string
+  listingTypeId: string
   url: string
 }
 
@@ -123,23 +133,21 @@ export interface IMobileHome extends IMHBOListing {
   modelType: string
   numBathrooms: number
   numBedrooms: number
-  photoSmall: string
   photoLarge: string
   rentalPrice: number | null
+  url: string
 }
 
 export interface IUnparsedMobileHome extends IUnparsedMHBOListing {
   askingPrice: number
-  latitude: number
-  longitude: number
   featured: boolean
   manufacturerName: string
   modelType: string
   numBathrooms: number
   numBedrooms: number
-  photoSmall: string
   photoLarge: string
   rentalPrice: number | null
+  url: string
 }
 
 export interface ICommunity extends IMHBOListing {
@@ -153,6 +161,7 @@ export interface ICommunity extends IMHBOListing {
   numExistingPhotos: number
   photoLarge: string
   source: string
+  url: string
   updatedAt: string
 }
 
@@ -171,12 +180,13 @@ export interface IUnparsedCommunity extends IUnparsedMHBOListing {
 }
 
 export interface IRestResource<T> {
-  search: (params: ISearchParams) => Promise<T[]>
+  details: (params: ISearchParams) => Promise<T[]>
+  summary: (params: ISearchParams) => Promise<T[]>
 }
 
 export interface IMHBOApiClient {
-  homes: IRestResource<IMobileHome>
-  communities: IRestResource<ICommunity>
+  homes: IRestResource<IMobileHome | IMHBOListing>
+  communities: IRestResource<ICommunity | IMHBOListing>
 }
 
 export type IFetchExecutor = (

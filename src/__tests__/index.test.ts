@@ -49,16 +49,16 @@ describe("the MHBO API Client", () => {
         zipCode: "32159"
       },
       askingPrice: 124995,
+      entityType: 1,
       featured: false,
-      id: 719739,
-      isCommunity: false,
+      id: 198718,
+      listingTypeId: 1,
       manufacturerName: "Skyline",
       modelType: "Double wide",
       numBathrooms: 2,
       numBedrooms: 3,
       photoLarge:
         "https://www.suncommunities.com/wp-content/uploads/2017/11/01-Field-Cape-Coral.jpg",
-      photoSmall: "",
       rentalPrice: null,
       url:
         "http://staging.mhbo.com/mobile-home/198718-604-nicklaus-court-lot-2121-lady-lake-fl-32159-double-wide"
@@ -84,19 +84,19 @@ describe("the MHBO API Client", () => {
       },
       createdAt: "2013-09-22T03:27:48.000-07:00",
       description:
-        "<p>Water Oak Country Club Estates is a gated, age-restricted (55+) manufactured home community located in Lady Lake, FL. Located conveniently off US 27 between Leesburg and Ocala, it is only one hour north of Orlando. Featuring 300 acres of rolling hills, trees, lakes and winding roads invite residents to walk, jog, bike ride, or take a leisurely stroll during the day. Mornings on the tennis court or golf course; afternoons exploring the area and its unique shops; evenings playing cards, bingo or shooting a game of pool - no matter what you might enjoy doing, Water Oak Country Club Estates provides for an incredible and active retirement lifestyle. Managed on-site by Sun Communities, Water Oak Country Club offers a friendly and comfortable resort-style living experience at low cost.To learn more—Call (888) 600-9798—or just drop by for a visit and a tour.</p>",
+        "\u003Cp\u003EWater Oak Country Club Estates is a gated, age-restricted (55+) manufactured home community located in Lady Lake, FL. ",
+      entityType: 2,
       featured: true,
       id: 37475,
-      isCommunity: true,
       isDealer: false,
       isPublished: true,
-      minSalePrice: 35995,
+      minSalePrice: 44000,
       name: "Water Oak Country Club",
-      numExistingPhotos: 20,
+      numExistingPhotos: 19,
       photoLarge:
         "http://dth4n83exov4m.cloudfront.net/photos/images/004/371/787/large/water-oak-country-club-5.jpg?1555695939",
       source: "suncommunities",
-      updatedAt: "2019-09-08T02:22:46.000-07:00",
+      updatedAt: "2019-09-21T02:22:32.000-07:00",
       url:
         "http://staging.mhbo.com/mobile-home-park/37475-water-oak-country-club-106-evergreen-lane-lady-lake-fl-32159"
     }

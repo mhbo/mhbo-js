@@ -1,68 +1,24 @@
-import { camelizeKeys } from "humps"
-import { authenticatedRequest } from "../requests"
-import { token } from "../token"
-import queryBuilder from "./queryBuilder"
-
 import {
   ICredentials,
   IEnvironment,
   IFetchExecutor,
+  IMHBOListing,
   IMobileHome,
   IRestResource,
-  ISearchParams,
-  IUnparsedMobileHome
+  ISearchParams
 } from "../types"
-
-/**
- * Performs a search for mobile homes.
- *
- * @param creds The authentication credential for the API request.
- * @param environment An optional override of the environment to utilize.
- * @param fetchExecutor An instance of the request executor.
- * @returns An array of mobile home results.
- */
-async function search(
-  params: ISearchParams,
-  creds: ICredentials,
-  environment?: IEnvironment,
-  fetchExecutor?: IFetchExecutor
-): Promise<IMobileHome[]> {
-  const response = await authenticatedRequest(
-    token(creds),
-    "GET",
-    `v1/mobile_homes/?${queryBuilder(params)}`,
-    environment,
-    fetchExecutor
-  )
-  const json = await response.json()
-  return (
-    json.map(
-      (result: any): IMobileHome => {
-        const home = camelizeKeys(result) as IUnparsedMobileHome
-        const { address } = home
-        const { latitude, longitude, lotNum } = address
-        return {
-          ...home,
-          address: {
-            ...address,
-            latitude: parseFloat(latitude),
-            longitude: parseFloat(longitude),
-            lotNum: lotNum === null ? lotNum : parseFloat(lotNum)
-          },
-          isCommunity: false
-        } as IMobileHome
-      }
-    ) || []
-  )
-}
+import details from "./details"
+import summary from "./summary"
 
 const homes = (
   creds: ICredentials,
   Ienvironment?: IEnvironment,
   fetchExecutor?: IFetchExecutor
-): IRestResource<IMobileHome> => ({
-  search: (params: ISearchParams) =>
-    search(params, creds, Ienvironment, fetchExecutor)
+): IRestResource<IMobileHome | IMHBOListing> => ({
+  details: (params: ISearchParams) =>
+    details(params, creds, Ienvironment, fetchExecutor),
+  summary: (params: ISearchParams) =>
+    summary(params, creds, Ienvironment, fetchExecutor)
 })
 
 export default homes
