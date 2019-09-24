@@ -115,7 +115,6 @@ export interface IMHBOListing {
   id: number
   entityType: IEntityType
   listingTypeId?: IListingTypeID
-  url: string
 }
 
 export interface IUnparsedMHBOListing {
@@ -147,7 +146,6 @@ export interface IUnparsedMobileHome extends IUnparsedMHBOListing {
   numBedrooms: number
   photoLarge: string
   rentalPrice: number | null
-  url: string
 }
 
 export interface ICommunity extends IMHBOListing {
