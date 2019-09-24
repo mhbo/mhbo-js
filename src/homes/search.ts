@@ -7,9 +7,9 @@ import {
   ICredentials,
   IEnvironment,
   IFetchExecutor,
-  IMHBOListing,
+  IMobileHome,
   ISearchParams,
-  IUnparsedMHBOListing
+  IUnparsedMobileHome
 } from "../types"
 
 /**
@@ -20,13 +20,12 @@ import {
  * @param fetchExecutor An instance of the request executor.
  * @returns An array of mobile home results.
  */
-async function searchSummary(
+async function search(
   params: ISearchParams,
   creds: ICredentials,
   environment?: IEnvironment,
   fetchExecutor?: IFetchExecutor
-): Promise<IMHBOListing[]> {
-  params.detailLevel = "SUMMARY"
+): Promise<IMobileHome[]> {
   const response = await authenticatedRequest(
     token(creds),
     "GET",
@@ -37,8 +36,8 @@ async function searchSummary(
   const json = await response.json()
   return (
     json.map(
-      (result: any): IMHBOListing => {
-        const home = camelizeKeys(result) as IUnparsedMHBOListing
+      (result: any): IMobileHome => {
+        const home = camelizeKeys(result) as IUnparsedMobileHome
         const { address, entityType, listingTypeId } = home
         const { latitude, longitude, lotNum } = address
         return {
@@ -51,9 +50,10 @@ async function searchSummary(
           },
           entityType: parseFloat(entityType),
           listingTypeId: parseFloat(listingTypeId)
-        } as IMHBOListing
+        } as IMobileHome
       }
     ) || []
   )
 }
-export default searchSummary
+
+export default search

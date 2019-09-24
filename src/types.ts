@@ -181,6 +181,7 @@ export interface IUnparsedCommunity extends IUnparsedMHBOListing {
 
 export interface IRestResource<T> {
   byIds: (params: number[]) => Promise<T[]>
+  search: (params: ISearchParams) => Promise<T[]>
   searchSummary: (params: ISearchParams) => Promise<T[]>
 }
 

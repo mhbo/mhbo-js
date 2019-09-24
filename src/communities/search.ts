@@ -1,16 +1,15 @@
 import { camelizeKeys } from "humps"
 import { authenticatedRequest } from "../requests"
 import { token } from "../token"
-import queryBuilder from "./queryBuilder"
-
 import {
+  ICommunity,
   ICredentials,
   IEnvironment,
   IFetchExecutor,
-  IMHBOListing,
   ISearchParams,
-  IUnparsedMHBOListing
+  IUnparsedCommunity
 } from "../types"
+import queryBuilder from "./queryBuilder"
 
 /**
  * Performs a search for mobile homes.
@@ -20,29 +19,28 @@ import {
  * @param fetchExecutor An instance of the request executor.
  * @returns An array of mobile home results.
  */
-async function searchSummary(
+async function search(
   params: ISearchParams,
   creds: ICredentials,
   environment?: IEnvironment,
   fetchExecutor?: IFetchExecutor
-): Promise<IMHBOListing[]> {
-  params.detailLevel = "SUMMARY"
+): Promise<ICommunity[]> {
   const response = await authenticatedRequest(
     token(creds),
     "GET",
-    `v1/mobile_homes/?${queryBuilder(params)}`,
+    `v1/communities/?${queryBuilder(params)}`,
     environment,
     fetchExecutor
   )
   const json = await response.json()
   return (
     json.map(
-      (result: any): IMHBOListing => {
-        const home = camelizeKeys(result) as IUnparsedMHBOListing
-        const { address, entityType, listingTypeId } = home
+      (result: any): ICommunity => {
+        const { ...community } = camelizeKeys(result) as IUnparsedCommunity
+        const { address, entityType, listingTypeId } = community
         const { latitude, longitude, lotNum } = address
         return {
-          ...home,
+          ...community,
           address: {
             ...address,
             latitude: parseFloat(latitude),
@@ -51,9 +49,10 @@ async function searchSummary(
           },
           entityType: parseFloat(entityType),
           listingTypeId: parseFloat(listingTypeId)
-        } as IMHBOListing
+        } as ICommunity
       }
     ) || []
   )
 }
-export default searchSummary
+
+export default search

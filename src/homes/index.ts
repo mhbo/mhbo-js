@@ -8,6 +8,7 @@ import {
   ISearchParams
 } from "../types"
 import byIds from "./byIds"
+import search from "./search"
 import searchSummary from "./searchSummary"
 
 const homes = (
@@ -17,6 +18,8 @@ const homes = (
 ): IRestResource<IMobileHome | IMHBOListing> => ({
   byIds: (params: number[]) =>
     byIds(params, creds, Ienvironment, fetchExecutor),
+  search: (params: ISearchParams) =>
+    search(params, creds, Ienvironment, fetchExecutor),
   searchSummary: (params: ISearchParams) =>
     searchSummary(params, creds, Ienvironment, fetchExecutor)
 })
