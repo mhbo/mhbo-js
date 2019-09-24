@@ -22,7 +22,7 @@ import {
  * @param fetchExecutor An instance of the request executor.
  * @returns An array of mobile home results.
  */
-async function summary(
+async function searchSummary(
   params: ISearchParams,
   creds: ICredentials,
   environment?: IEnvironment,
@@ -58,4 +58,4 @@ async function summary(
     ) || []
   )
 }
-export default summary
+export default searchSummary

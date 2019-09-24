@@ -7,18 +7,18 @@ import {
   IRestResource,
   ISearchParams
 } from "../types"
-import details from "./details"
-import summary from "./summary"
+import byIds from "./byIds"
+import searchSummary from "./searchSummary"
 
 const communities = (
   creds: ICredentials,
   Ienvironment?: IEnvironment,
   fetchExecutor?: IFetchExecutor
 ): IRestResource<ICommunity | IMHBOListing> => ({
-  details: (params: ISearchParams) =>
-    details(params, creds, Ienvironment, fetchExecutor),
-  summary: (params: ISearchParams) =>
-    summary(params, creds, Ienvironment, fetchExecutor)
+  byIds: (params: number[]) =>
+    byIds(params, creds, Ienvironment, fetchExecutor),
+  searchSummary: (params: ISearchParams) =>
+    searchSummary(params, creds, Ienvironment, fetchExecutor)
 })
 
 export default communities

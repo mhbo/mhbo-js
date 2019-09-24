@@ -21,14 +21,6 @@ describe("the query builder", () => {
     )
   })
 
-  it("should map all attributes as an appropriate query string for a full level", () => {
-    const query = queryBuilder({
-      homeTypeId: 1,
-      listingIds: [1234, 2345]
-    })
-    expect(query).toEqual("1234,2345&")
-  })
-
   it("should exclude bathrooms and bedrooms if not included", () => {
     const query = queryBuilder({
       ageRestrictionType: 1,

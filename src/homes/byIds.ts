@@ -1,15 +1,14 @@
 import { camelizeKeys } from "humps"
 import { authenticatedRequest } from "../requests"
 import { token } from "../token"
+
 import {
-  ICommunity,
   ICredentials,
   IEnvironment,
   IFetchExecutor,
-  ISearchParams,
-  IUnparsedCommunity
+  IMobileHome,
+  IUnparsedMobileHome
 } from "../types"
-import queryBuilder from "./queryBuilder"
 
 /**
  * Performs a search for mobile homes.
@@ -19,25 +18,24 @@ import queryBuilder from "./queryBuilder"
  * @param fetchExecutor An instance of the request executor.
  * @returns An array of mobile home results.
  */
-async function details(
-  params: ISearchParams,
+async function byIds(
+  params: number[],
   creds: ICredentials,
   environment?: IEnvironment,
   fetchExecutor?: IFetchExecutor
-): Promise<ICommunity[]> {
-  params.detailLevel = "FULL"
+): Promise<IMobileHome[]> {
   const response = await authenticatedRequest(
     token(creds),
     "GET",
-    `v1/communities/?${queryBuilder(params)}`,
+    `v1/mobile_homes/?${params.toString()}&detail_level=FULL`,
     environment,
     fetchExecutor
   )
   const json = await response.json()
   return (
     json.map(
-      (result: any): ICommunity => {
-        const home = camelizeKeys(result) as IUnparsedCommunity
+      (result: any): IMobileHome => {
+        const home = camelizeKeys(result) as IUnparsedMobileHome
         const { address, entityType, listingTypeId } = home
         const { latitude, longitude, lotNum } = address
         return {
@@ -50,10 +48,9 @@ async function details(
           },
           entityType: parseFloat(entityType),
           listingTypeId: parseFloat(listingTypeId)
-        } as ICommunity
+        } as IMobileHome
       }
     ) || []
   )
 }
-
-export default details
+export default byIds

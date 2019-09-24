@@ -180,8 +180,8 @@ export interface IUnparsedCommunity extends IUnparsedMHBOListing {
 }
 
 export interface IRestResource<T> {
-  details: (params: ISearchParams) => Promise<T[]>
-  summary: (params: ISearchParams) => Promise<T[]>
+  byIds: (params: number[]) => Promise<T[]>
+  searchSummary: (params: ISearchParams) => Promise<T[]>
 }
 
 export interface IMHBOApiClient {

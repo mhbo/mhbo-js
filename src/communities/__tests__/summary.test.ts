@@ -19,7 +19,7 @@ const communities = resource(
 
 describe("the communities resourse #summary", () => {
   beforeEach(() => {
-    communities.summary({
+    communities.searchSummary({
       homeTypeId: 2
     })
   })

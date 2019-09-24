@@ -6,22 +6,18 @@ import { ISearchParams } from "../types"
 
 const queryBuilder = (params: ISearchParams) => {
   const query: { [name: string]: any } = Object.assign({}, params)
-  const querystring = qs
+  return qs
     .stringify(
       Object.keys(query)
         .filter(k => typeof query[k] !== undefined)
         .filter(k => query[k] !== "")
         .filter(k => k !== "homeTypeId")
-        .filter(k => k !== "listingIds")
         .reduce(
           (p, k) => Object.assign({}, p, { [snakeCase(k)]: query[k] }),
           {}
         )
     )
     .replace("location", "display_location")
-  return `${
-    params.listingIds ? `${params.listingIds.toString()}&` : ""
-  }${querystring}`
 }
 
 export default queryBuilder

@@ -19,10 +19,7 @@ const communities = resource(
 
 describe("the communities resource #details", () => {
   beforeEach(() => {
-    communities.details({
-      homeTypeId: 2,
-      listingIds: [123, 234]
-    })
+    communities.byIds([123, 234])
   })
 
   it("should make 1 fetch request", () => {

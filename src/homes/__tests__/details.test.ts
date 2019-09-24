@@ -19,10 +19,7 @@ const homes = resource(
 
 describe("the homes resource #details", () => {
   beforeEach(() => {
-    homes.details({
-      homeTypeId: 1,
-      listingIds: [234, 2345]
-    })
+    homes.byIds([234, 2345])
   })
 
   it("should make 1 fetch request", () => {

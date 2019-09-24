@@ -19,7 +19,7 @@ const homes = resource(
 
 describe("the homes resource #summary", () => {
   beforeEach(() => {
-    homes.summary({
+    homes.searchSummary({
       homeTypeId: 1,
       listingTypeIds: [IListingTypeID.ForSale],
       maxPrice: 100000,

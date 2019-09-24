@@ -9,14 +9,6 @@ describe("the query builder", () => {
     expect(query).toEqual("display_location=Mesa%2C%20AZ")
   })
 
-  it("should map all attributes as an appropriate query string for summary detail level", () => {
-    const query = queryBuilder({
-      homeTypeId: 2,
-      listingIds: [1234, 3456]
-    })
-    expect(query).toEqual("1234,3456&")
-  })
-
   it("should omit blank attributes as an appropriate query string", () => {
     const query = queryBuilder({
       homeTypeId: 2
