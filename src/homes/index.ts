@@ -1,3 +1,4 @@
+import search from "../search"
 import {
   ICredentials,
   IEnvironment,
@@ -5,11 +6,11 @@ import {
   IMHBOListing,
   IMobileHome,
   IRestResource,
-  ISearchParams
+  ISearchParams,
+  IUnparsedMHBOListing,
+  IUnparsedMobileHome
 } from "../types"
-import byIds from "./byIds"
-import search from "./search"
-import searchSummary from "./searchSummary"
+import queryBuilder from "./queryBuilder"
 
 const homes = (
   creds: ICredentials,
@@ -17,11 +18,26 @@ const homes = (
   fetchExecutor?: IFetchExecutor
 ): IRestResource<IMobileHome | IMHBOListing> => ({
   byIds: (params: number[]) =>
-    byIds(params, creds, Ienvironment, fetchExecutor),
+    search<IMobileHome, IUnparsedMobileHome>(
+      `v1/mobile_homes/?${params.toString()}&detail_level=FULL`,
+      creds,
+      Ienvironment,
+      fetchExecutor
+    ),
   search: (params: ISearchParams) =>
-    search(params, creds, Ienvironment, fetchExecutor),
+    search<IMobileHome, IUnparsedMobileHome>(
+      `v1/mobile_homes/?${queryBuilder(params)}`,
+      creds,
+      Ienvironment,
+      fetchExecutor
+    ),
   searchSummary: (params: ISearchParams) =>
-    searchSummary(params, creds, Ienvironment, fetchExecutor)
+    search<IMHBOListing, IUnparsedMHBOListing>(
+      `v1/mobile_homes/?${queryBuilder({ ...params, detailLevel: "SUMMARY" })}`,
+      creds,
+      Ienvironment,
+      fetchExecutor
+    )
 })
 
 export default homes

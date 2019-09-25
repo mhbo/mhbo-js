@@ -1,3 +1,4 @@
+import search from "../search"
 import {
   ICommunity,
   ICredentials,
@@ -5,11 +6,11 @@ import {
   IFetchExecutor,
   IMHBOListing,
   IRestResource,
-  ISearchParams
+  ISearchParams,
+  IUnparsedCommunity,
+  IUnparsedMHBOListing
 } from "../types"
-import byIds from "./byIds"
-import search from "./search"
-import searchSummary from "./searchSummary"
+import queryBuilder from "./queryBuilder"
 
 const communities = (
   creds: ICredentials,
@@ -17,11 +18,26 @@ const communities = (
   fetchExecutor?: IFetchExecutor
 ): IRestResource<ICommunity | IMHBOListing> => ({
   byIds: (params: number[]) =>
-    byIds(params, creds, Ienvironment, fetchExecutor),
-  searchSummary: (params: ISearchParams) =>
-    searchSummary(params, creds, Ienvironment, fetchExecutor),
+    search<ICommunity, IUnparsedCommunity>(
+      `v1/communities/?${params.toString()}&detail_level=FULL`,
+      creds,
+      Ienvironment,
+      fetchExecutor
+    ),
   search: (params: ISearchParams) =>
-    search(params, creds, Ienvironment, fetchExecutor)
+    search<ICommunity, IUnparsedCommunity>(
+      `v1/communities/?${queryBuilder(params)}`,
+      creds,
+      Ienvironment,
+      fetchExecutor
+    ),
+  searchSummary: (params: ISearchParams) =>
+    search<IMHBOListing, IUnparsedMHBOListing>(
+      `v1/communities/?${queryBuilder({ ...params, detailLevel: "SUMMARY" })}`,
+      creds,
+      Ienvironment,
+      fetchExecutor
+    )
 })
 
 export default communities

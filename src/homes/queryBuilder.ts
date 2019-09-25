@@ -1,23 +1,10 @@
-import { snakeCase } from "lodash"
-import * as qs from "querystring"
+import communitiesQueryBuilder from "../communities/queryBuilder"
 import { ISearchParams } from "../types"
 
 // ?is_all_ages=yes&is_senior=yes&max_price=100000&model_type_id%5B%5D=3&model_type_id%5B%5D=4&model_type_id%5B%5D=5&sort=newest-listings&view_type=list
 
 const queryBuilder = (params: ISearchParams) => {
-  const query: { [name: string]: any } = Object.assign({}, params)
-  return qs
-    .stringify(
-      Object.keys(query)
-        .filter(k => typeof query[k] !== undefined)
-        .filter(k => query[k] !== "")
-        .filter(k => k !== "homeTypeId")
-        .reduce(
-          (p, k) => Object.assign({}, p, { [snakeCase(k)]: query[k] }),
-          {}
-        )
-    )
-    .replace("location", "display_location")
+  return communitiesQueryBuilder(params)
     .replace(/num_bathrooms/g, "num_bathrooms%5B%5D")
     .replace(/num_bedrooms/g, "num_bedrooms%5B%5D")
     .replace(/model_type_ids/g, "model_type_id%5B%5D")
