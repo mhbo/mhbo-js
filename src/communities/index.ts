@@ -1,4 +1,4 @@
-import search from "../search"
+import { requestGet } from "../entityRequest"
 import {
   ICommunity,
   ICredentials,
@@ -11,6 +11,7 @@ import {
   IUnparsedMHBOListing
 } from "../types"
 import queryBuilder from "./queryBuilder"
+import { request } from "https"
 
 const communities = (
   creds: ICredentials,
@@ -18,21 +19,21 @@ const communities = (
   fetchExecutor?: IFetchExecutor
 ): IRestResource<ICommunity | IMHBOListing> => ({
   byIds: (params: number[]) =>
-    search<ICommunity, IUnparsedCommunity>(
+    requestGet<ICommunity, IUnparsedCommunity>(
       `v1/communities/?${params.toString()}&detail_level=FULL`,
       creds,
       Ienvironment,
       fetchExecutor
     ),
   search: (params: ISearchParams) =>
-    search<ICommunity, IUnparsedCommunity>(
+    requestGet<ICommunity, IUnparsedCommunity>(
       `v1/communities/?${queryBuilder(params)}`,
       creds,
       Ienvironment,
       fetchExecutor
     ),
   searchSummary: (params: ISearchParams) =>
-    search<IMHBOListing, IUnparsedMHBOListing>(
+    requestGet<IMHBOListing, IUnparsedMHBOListing>(
       `v1/communities/?${queryBuilder({ ...params, detailLevel: "SUMMARY" })}`,
       creds,
       Ienvironment,

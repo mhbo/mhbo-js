@@ -1,4 +1,4 @@
-import search from "../search"
+import { requestGet } from "../entityRequest"
 import {
   ICredentials,
   IEnvironment,
@@ -18,21 +18,21 @@ const homes = (
   fetchExecutor?: IFetchExecutor
 ): IRestResource<IMobileHome | IMHBOListing> => ({
   byIds: (params: number[]) =>
-    search<IMobileHome, IUnparsedMobileHome>(
+    requestGet<IMobileHome, IUnparsedMobileHome>(
       `v1/mobile_homes/?${params.toString()}&detail_level=FULL`,
       creds,
       Ienvironment,
       fetchExecutor
     ),
   search: (params: ISearchParams) =>
-    search<IMobileHome, IUnparsedMobileHome>(
+    requestGet<IMobileHome, IUnparsedMobileHome>(
       `v1/mobile_homes/?${queryBuilder(params)}`,
       creds,
       Ienvironment,
       fetchExecutor
     ),
   searchSummary: (params: ISearchParams) =>
-    search<IMHBOListing, IUnparsedMHBOListing>(
+    requestGet<IMHBOListing, IUnparsedMHBOListing>(
       `v1/mobile_homes/?${queryBuilder({ ...params, detailLevel: "SUMMARY" })}`,
       creds,
       Ienvironment,
