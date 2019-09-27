@@ -1,6 +1,6 @@
 import * as jwt from "jsonwebtoken"
 
-import { IEnvironment, IListingTypeID } from "../../types"
+import { IEnvironment } from "../../types"
 import resource from "../index"
 
 const emptyPromise = (val: any) => new Promise((resolve, _) => resolve(val))

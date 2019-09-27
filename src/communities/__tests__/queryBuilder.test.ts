@@ -1,7 +1,7 @@
 import queryBuilder from "../queryBuilder"
 
 describe("the query builder", () => {
-  it("should map all attributes as an appropriate query string", () => {
+  it("should map all attributes as an appropriate query string for full detail level", () => {
     const query = queryBuilder({
       homeTypeId: 2,
       location: "Mesa, AZ"

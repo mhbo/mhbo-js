@@ -1,67 +1,44 @@
-import { camelizeKeys } from "humps"
-import { authenticatedRequest } from "../requests"
-import { token } from "../token"
-import queryBuilder from "./queryBuilder"
-
+import { requestGet } from "../entityRequest"
 import {
   ICommunity,
   ICredentials,
   IEnvironment,
   IFetchExecutor,
+  IMHBOListing,
   IRestResource,
   ISearchParams,
-  IUnparsedCommunity
+  IUnparsedCommunity,
+  IUnparsedMHBOListing
 } from "../types"
-
-/**
- * Performs a search for mobile homes.
- *
- * @param creds The authentication credential for the API request.
- * @param environment An optional override of the environment to utilize.
- * @param fetchExecutor An instance of the request executor.
- * @returns An array of mobile home results.
- */
-async function search(
-  params: ISearchParams,
-  creds: ICredentials,
-  environment?: IEnvironment,
-  fetchExecutor?: IFetchExecutor
-): Promise<ICommunity[]> {
-  const response = await authenticatedRequest(
-    token(creds),
-    "GET",
-    `v1/communities/?${queryBuilder(params)}`,
-    environment,
-    fetchExecutor
-  )
-  const json = await response.json()
-  return (
-    json.map(
-      (result: any): ICommunity => {
-        const { ...community } = camelizeKeys(result) as IUnparsedCommunity
-        const { address } = community
-        const { latitude, longitude } = address
-        return {
-          ...community,
-          address: {
-            ...address,
-            latitude: parseFloat(latitude),
-            longitude: parseFloat(longitude)
-          },
-          isCommunity: true
-        } as ICommunity
-      }
-    ) || []
-  )
-}
+import queryBuilder from "./queryBuilder"
+import { request } from "https"
 
 const communities = (
   creds: ICredentials,
   Ienvironment?: IEnvironment,
   fetchExecutor?: IFetchExecutor
-): IRestResource<ICommunity> => ({
+): IRestResource<ICommunity | IMHBOListing> => ({
+  byIds: (params: number[]) =>
+    requestGet<ICommunity, IUnparsedCommunity>(
+      `v1/communities/?${params.toString()}&detail_level=FULL`,
+      creds,
+      Ienvironment,
+      fetchExecutor
+    ),
   search: (params: ISearchParams) =>
-    search(params, creds, Ienvironment, fetchExecutor)
+    requestGet<ICommunity, IUnparsedCommunity>(
+      `v1/communities/?${queryBuilder(params)}`,
+      creds,
+      Ienvironment,
+      fetchExecutor
+    ),
+  searchSummary: (params: ISearchParams) =>
+    requestGet<IMHBOListing, IUnparsedMHBOListing>(
+      `v1/communities/?${queryBuilder({ ...params, detailLevel: "SUMMARY" })}`,
+      creds,
+      Ienvironment,
+      fetchExecutor
+    )
 })
 
 export default communities
