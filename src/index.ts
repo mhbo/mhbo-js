@@ -5,6 +5,7 @@ import homes from "./homes/index"
 import {
   ICommunity,
   ICredentials,
+  IEntityType,
   IEnvironment,
   IListingTypeID,
   IMHBOApiClient,
@@ -47,7 +48,8 @@ export {
   ICommunity,
   IModelTypeID,
   ISellerTypeID,
-  IMHBOListing
+  IMHBOListing,
+  IEntityType
 }
 
 export default Client

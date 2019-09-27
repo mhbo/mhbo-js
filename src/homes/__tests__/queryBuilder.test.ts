@@ -1,7 +1,7 @@
 import queryBuilder from "../queryBuilder"
 
 describe("the query builder", () => {
-  it("should map all attributes as an appropriate query string", () => {
+  it("should map all attributes as an appropriate query string for a summary level", () => {
     const query = queryBuilder({
       ageRestrictionType: 1,
       homeTypeId: 1,
