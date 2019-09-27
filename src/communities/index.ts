@@ -19,7 +19,7 @@ const communities = (
 ): IRestResource<ICommunity | IMHBOListing> => ({
   byIds: (params: number[]) =>
     requestGet<ICommunity, IUnparsedCommunity>(
-      `v1/communities/?${params.toString()}&detail_level=FULL`,
+      `v1/communities/${params.toString()}&detail_level=FULL`,
       creds,
       Ienvironment,
       fetchExecutor
