@@ -11,7 +11,6 @@ import {
   IUnparsedMHBOListing
 } from "../types"
 import queryBuilder from "./queryBuilder"
-import { request } from "https"
 
 const communities = (
   creds: ICredentials,
