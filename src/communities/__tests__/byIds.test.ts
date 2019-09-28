@@ -28,7 +28,7 @@ describe("the communities resource #details", () => {
 
   it("should call the search endpoint", () => {
     expect(mockFetch.mock.calls[0][0]).toBe(
-      "http://localhost:3000/api/v1/communities/123,234&detail_level=FULL"
+      "http://localhost:3000/api/v1/communities/123,234?detail_level=FULL"
     )
   })
 
