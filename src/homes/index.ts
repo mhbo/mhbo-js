@@ -19,7 +19,7 @@ const homes = (
 ): IRestResource<IMobileHome | IMHBOListing> => ({
   byIds: (params: number[]) =>
     requestGet<IMobileHome, IUnparsedMobileHome>(
-      `v1/mobile_homes/?${params.toString()}&detail_level=FULL`,
+      `v1/mobile_homes/${params.toString()}?detail_level=FULL`,
       creds,
       Ienvironment,
       fetchExecutor
