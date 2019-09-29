@@ -28,7 +28,7 @@ describe("the homes resource #details", () => {
 
   it("should call the search endpoint", () => {
     expect(mockFetch.mock.calls[0][0]).toBe(
-      "http://localhost:3000/api/v1/mobile_homes/?234,2345&detail_level=FULL"
+      "http://localhost:3000/api/v1/mobile_homes/234,2345?detail_level=FULL"
     )
   })
 
