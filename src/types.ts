@@ -45,7 +45,9 @@ export enum IHomeTypeID {
 }
 
 export interface ISearchParams {
-  ageRestrictionType?: number
+  ageRestrictionType?: number[]
+  withPetFriendly?: boolean
+  isResidentOwned?: boolean
   lenderRepos?: boolean
   listingTypeIds?: IListingTypeID[]
   location?: string

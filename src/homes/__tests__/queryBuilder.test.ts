@@ -3,7 +3,6 @@ import queryBuilder from "../queryBuilder"
 describe("the query builder", () => {
   it("should map all attributes as an appropriate query string for a summary level", () => {
     const query = queryBuilder({
-      ageRestrictionType: 1,
       homeTypeId: 1,
       lenderRepos: true,
       listingTypeIds: [1],
@@ -17,13 +16,12 @@ describe("the query builder", () => {
       sellerTypeIds: [3]
     })
     expect(query).toEqual(
-      "age_restriction_type%5B%5D=1&lender_repos=true&listing_type_id%5B%5D=1&display_location=Mesa%2C%20AZ&max_price=5000&min_price=0&model_type_id%5B%5D=1&model_type_id%5B%5D=2&num_bathrooms%5B%5D=2&num_bedrooms%5B%5D=3&pre_owned=false&seller_type_id%5B%5D=3"
+      "lender_repos=true&listing_type_id%5B%5D=1&display_location=Mesa%2C%20AZ&max_price=5000&min_price=0&model_type_id%5B%5D=1&model_type_id%5B%5D=2&num_bathrooms%5B%5D=2&num_bedrooms%5B%5D=3&pre_owned=false&seller_type_id%5B%5D=3"
     )
   })
 
   it("should exclude bathrooms and bedrooms if not included", () => {
     const query = queryBuilder({
-      ageRestrictionType: 1,
       homeTypeId: 1,
       listingTypeIds: [1],
       location: "Mesa, AZ",
@@ -32,13 +30,12 @@ describe("the query builder", () => {
       modelTypeIds: [1, 2]
     })
     expect(query).toEqual(
-      "age_restriction_type%5B%5D=1&listing_type_id%5B%5D=1&display_location=Mesa%2C%20AZ&max_price=5000&min_price=0&model_type_id%5B%5D=1&model_type_id%5B%5D=2"
+      "listing_type_id%5B%5D=1&display_location=Mesa%2C%20AZ&max_price=5000&min_price=0&model_type_id%5B%5D=1&model_type_id%5B%5D=2"
     )
   })
 
   it("should omit blank attributes as an appropriate query string", () => {
     const query = queryBuilder({
-      ageRestrictionType: 1,
       homeTypeId: 1,
       listingTypeIds: [],
       location: "Mesa, AZ",
@@ -49,7 +46,7 @@ describe("the query builder", () => {
       numBedrooms: 3
     })
     expect(query).toEqual(
-      "age_restriction_type%5B%5D=1&display_location=Mesa%2C%20AZ&max_price=5000&min_price=0&num_bathrooms%5B%5D=2&num_bedrooms%5B%5D=3"
+      "display_location=Mesa%2C%20AZ&max_price=5000&min_price=0&num_bathrooms%5B%5D=2&num_bedrooms%5B%5D=3"
     )
   })
 })
