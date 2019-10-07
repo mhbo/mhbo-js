@@ -18,6 +18,7 @@ const queryBuilder = (params: ISearchParams) => {
         )
     )
     .replace("location", "display_location")
+    .replace(/age_restriction_type/g, "age_restriction_type%5B%5D")
 }
 
 export default queryBuilder
