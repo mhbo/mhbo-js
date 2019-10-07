@@ -24,8 +24,8 @@ describe("the homes resource #summary", () => {
       listingTypeIds: [IListingTypeID.ForSale],
       maxPrice: 100000,
       minPrice: 50000,
-      numBathrooms: 2,
-      numBedrooms: 3
+      numBathrooms: [2],
+      numBedrooms: [3]
     })
   })
 
