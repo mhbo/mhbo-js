@@ -3,7 +3,7 @@ import queryBuilder from "../queryBuilder"
 describe("the query builder", () => {
   it("should map all attributes as an appropriate query string for a summary level", () => {
     const query = queryBuilder({
-      ageRestrictionType: 1,
+      ageRestrictionType: [1],
       homeTypeId: 1,
       lenderRepos: true,
       listingTypeIds: [1],
@@ -23,7 +23,7 @@ describe("the query builder", () => {
 
   it("should exclude bathrooms and bedrooms if not included", () => {
     const query = queryBuilder({
-      ageRestrictionType: 1,
+      ageRestrictionType: [1],
       homeTypeId: 1,
       listingTypeIds: [1],
       location: "Mesa, AZ",
@@ -38,7 +38,7 @@ describe("the query builder", () => {
 
   it("should omit blank attributes as an appropriate query string", () => {
     const query = queryBuilder({
-      ageRestrictionType: 1,
+      ageRestrictionType: [1],
       homeTypeId: 1,
       listingTypeIds: [],
       location: "Mesa, AZ",
