@@ -54,8 +54,8 @@ export interface ISearchParams {
   maxPrice?: number
   minPrice?: number
   modelTypeIds?: IModelTypeID[]
-  numBathrooms?: number
-  numBedrooms?: number
+  numBathrooms?: number[]
+  numBedrooms?: number[]
   openHousesOnly?: boolean
   pageCount?: number
   preOwned?: boolean
