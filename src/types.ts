@@ -44,8 +44,13 @@ export enum IHomeTypeID {
   MobileHome = 1
 }
 
+export enum IAgeRestrictionType {
+  FiftyFivePlus = 2,
+  AllAges = 1
+}
+
 export interface ISearchParams {
-  ageRestrictionType?: number[]
+  ageRestrictionType?: IAgeRestrictionType[]
   withPetFriendly?: boolean
   isResidentOwned?: boolean
   lenderRepos?: boolean
@@ -76,7 +81,17 @@ export interface ICredentials {
   apiSecret: string
 }
 
-export interface IUnparsedAddress {
+export interface IUnparsedLatLongAddress {
+  latitude: string
+  longitude: string
+}
+
+export interface ILatLongAddress {
+  latitude: number
+  longitude: number
+}
+
+export interface IUnparsedAddress extends IUnparsedLatLongAddress {
   addressableId: number
   addressableType: string
   city: string
@@ -86,15 +101,13 @@ export interface IUnparsedAddress {
   hasSearchedCoordinates: boolean
   id: number
   isHidden: boolean
-  latitude: string
-  longitude: string
   lotNum: string | null
   numberAndStreet: string
   state: string
   zipCode: string
 }
 
-export interface IAddress {
+export interface IAddress extends ILatLongAddress {
   addressableId: number
   addressableType: string
   city: string
@@ -104,12 +117,24 @@ export interface IAddress {
   hasSearchedCoordinates: boolean
   id: number
   isHidden: boolean
-  latitude: number
-  longitude: number
   lotNum: number | null
   numberAndStreet: string
   state: string
   zipCode: string
+}
+
+export interface IMobileHomeMHBOListing {
+  address: ILatLongAddress
+  id: number
+  entityType: IEntityType
+  listingTypeId?: IListingTypeID
+}
+
+export interface IUnparsedMobileHomeMHBOListing {
+  address: IUnparsedLatLongAddress
+  id: number
+  entityType: string
+  listingTypeId: string
 }
 
 export interface IMHBOListing {
@@ -124,7 +149,6 @@ export interface IUnparsedMHBOListing {
   id: number
   entityType: string
   listingTypeId: string
-  url: string
 }
 
 export interface IMobileHome extends IMHBOListing {
@@ -151,11 +175,13 @@ export interface IUnparsedMobileHome extends IUnparsedMHBOListing {
 }
 
 export interface ICommunity extends IMHBOListing {
+  ageRestrictionType: null | IAgeRestrictionType
   createdAt: string
   description: string | null
   featured: boolean
   isPublished: boolean
   isDealer: boolean
+  mobilehomes: IMobileHomeMHBOListing[]
   minSalePrice: null | number
   name: string
   numExistingPhotos: number
@@ -166,11 +192,13 @@ export interface ICommunity extends IMHBOListing {
 }
 
 export interface IUnparsedCommunity extends IUnparsedMHBOListing {
+  ageRestrictionType: null | IAgeRestrictionType
   createdAt: string
   description: string | null
   featured: boolean
   isPublished: boolean
   isDealer: boolean
+  mobilehomes: IUnparsedMobileHomeMHBOListing[]
   minSalePrice: null | number
   name: string
   numExistingPhotos: number

@@ -3,6 +3,7 @@ import { HOME_TYPE, LISTING_TYPES, MODEL_TYPES } from "./constants"
 import homes from "./homes/index"
 
 import {
+  IAgeRestrictionType,
   ICommunity,
   ICredentials,
   IEntityType,
@@ -11,6 +12,7 @@ import {
   IMHBOApiClient,
   IMHBOListing,
   IMobileHome,
+  IMobileHomeMHBOListing,
   IModelTypeID,
   ISellerTypeID
 } from "./types"
@@ -49,7 +51,9 @@ export {
   IModelTypeID,
   ISellerTypeID,
   IMHBOListing,
-  IEntityType
+  IEntityType,
+  IAgeRestrictionType,
+  IMobileHomeMHBOListing
 }
 
 export default Client

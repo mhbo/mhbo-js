@@ -2,25 +2,24 @@ import { camelizeKeys } from "humps"
 import { authenticatedRequest } from "./requests"
 import { token } from "./token"
 import {
+  ICommunity,
   ICredentials,
   IEnvironment,
   IFetchExecutor,
   IMHBOListing,
+  IUnparsedCommunity,
   IUnparsedMHBOListing
 } from "./types"
 
 /**
- * Performs a search for mobile homes.
+ * Performs a GET request to mhbo api.
  *
  * @param creds The authentication credential for the API request.
  * @param environment An optional override of the environment to utilize.
  * @param fetchExecutor An instance of the request executor.
  * @returns An array of mobile home results.
  */
-async function requestGet<
-  T extends IMHBOListing,
-  U extends IUnparsedMHBOListing
->(
+async function requestGet<T extends any, U extends any>(
   url: string,
   creds: ICredentials,
   environment?: IEnvironment,
@@ -40,7 +39,7 @@ async function requestGet<
         const { ...community } = camelizeKeys(result) as U
         const { address, entityType, listingTypeId } = community
         const { latitude, longitude, lotNum } = address
-        return ({
+        const parsedResult = {
           ...community,
           address: {
             ...address,
@@ -50,7 +49,21 @@ async function requestGet<
           },
           entityType: parseFloat(entityType),
           listingTypeId: parseFloat(listingTypeId)
-        } as unknown) as T
+        }
+        if (community.mobilehomes) {
+          const parsedMobilehomes = community.mobilehomes.map(
+            ({ address: add, ...home }: IUnparsedCommunity) => ({
+              ...home,
+              address: {
+                ...add,
+                latitude: parseFloat(add.latitude),
+                longitude: parseFloat(add.longitude)
+              }
+            })
+          )
+          parsedResult.mobilehomes = parsedMobilehomes
+        }
+        return (parsedResult as unknown) as T
       }
     ) || []
   )
