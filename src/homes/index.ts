@@ -6,9 +6,7 @@ import {
   IMHBOListing,
   IMobileHome,
   IRestResource,
-  ISearchParams,
-  IUnparsedMHBOListing,
-  IUnparsedMobileHome
+  ISearchParams
 } from "../types"
 import queryBuilder from "./queryBuilder"
 
@@ -18,23 +16,26 @@ const homes = (
   fetchExecutor?: IFetchExecutor
 ): IRestResource<IMobileHome | IMHBOListing> => ({
   byIds: (params: number[]) =>
-    requestGet<IMobileHome, IUnparsedMobileHome>(
+    requestGet<IMobileHome>(
       `v1/mobile_homes/${params.toString()}?detail_level=FULL`,
       creds,
+      "MobileHome",
       Ienvironment,
       fetchExecutor
     ),
   search: (params: ISearchParams) =>
-    requestGet<IMobileHome, IUnparsedMobileHome>(
+    requestGet<IMobileHome>(
       `v1/mobile_homes/?${queryBuilder(params)}`,
       creds,
+      "MobileHome",
       Ienvironment,
       fetchExecutor
     ),
   searchSummary: (params: ISearchParams) =>
-    requestGet<IMHBOListing, IUnparsedMHBOListing>(
+    requestGet<IMHBOListing>(
       `v1/mobile_homes/?${queryBuilder({ ...params, detailLevel: "SUMMARY" })}`,
       creds,
+      "MHBOListing",
       Ienvironment,
       fetchExecutor
     )

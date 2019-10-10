@@ -1,9 +1,9 @@
 import Client, {
+  ICommunity,
   IListingTypeID,
   IMobileHome,
   IModelTypeID,
-  ISellerTypeID,
-  ICommunity
+  ISellerTypeID
 } from "../index"
 import { IHomeTypeID } from "../types"
 
@@ -82,6 +82,7 @@ describe("the MHBO API Client", () => {
         updatedAt: "2019-09-07T23:53:32.000-07:00",
         zipCode: "32159"
       },
+      ageRestrictionType: null,
       createdAt: "2013-09-22T03:27:48.000-07:00",
       description:
         "\u003Cp\u003EWater Oak Country Club Estates is a gated, age-restricted (55+) manufactured home community located in Lady Lake, FL. ",
@@ -91,6 +92,17 @@ describe("the MHBO API Client", () => {
       isDealer: false,
       isPublished: true,
       minSalePrice: 44000,
+      mobilehomes: [
+        {
+          address: {
+            latitude: 28.8751532,
+            longitude: -81.8847011
+          },
+          entityType: 1,
+          id: 335121,
+          listingTypeId: 1
+        }
+      ],
       name: "Water Oak Country Club",
       numExistingPhotos: 19,
       photoLarge:

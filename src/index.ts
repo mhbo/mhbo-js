@@ -3,6 +3,7 @@ import { HOME_TYPE, LISTING_TYPES, MODEL_TYPES } from "./constants"
 import homes from "./homes/index"
 
 import {
+  IAgeRestrictionType,
   ICommunity,
   ICredentials,
   IEntityType,
@@ -49,7 +50,8 @@ export {
   IModelTypeID,
   ISellerTypeID,
   IMHBOListing,
-  IEntityType
+  IEntityType,
+  IAgeRestrictionType
 }
 
 export default Client

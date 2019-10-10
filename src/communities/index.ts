@@ -6,9 +6,7 @@ import {
   IFetchExecutor,
   IMHBOListing,
   IRestResource,
-  ISearchParams,
-  IUnparsedCommunity,
-  IUnparsedMHBOListing
+  ISearchParams
 } from "../types"
 import queryBuilder from "./queryBuilder"
 
@@ -18,23 +16,26 @@ const communities = (
   fetchExecutor?: IFetchExecutor
 ): IRestResource<ICommunity | IMHBOListing> => ({
   byIds: (params: number[]) =>
-    requestGet<ICommunity, IUnparsedCommunity>(
+    requestGet<ICommunity>(
       `v1/communities/${params.toString()}?detail_level=FULL`,
       creds,
+      "Community",
       Ienvironment,
       fetchExecutor
     ),
   search: (params: ISearchParams) =>
-    requestGet<ICommunity, IUnparsedCommunity>(
+    requestGet<ICommunity>(
       `v1/communities/?${queryBuilder(params)}`,
       creds,
+      "Community",
       Ienvironment,
       fetchExecutor
     ),
   searchSummary: (params: ISearchParams) =>
-    requestGet<IMHBOListing, IUnparsedMHBOListing>(
+    requestGet<IMHBOListing>(
       `v1/communities/?${queryBuilder({ ...params, detailLevel: "SUMMARY" })}`,
       creds,
+      "MHBOListing",
       Ienvironment,
       fetchExecutor
     )
