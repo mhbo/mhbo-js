@@ -123,35 +123,22 @@ export interface IAddress extends ILatLongAddress {
   zipCode: string
 }
 
-export interface IMobileHomeMHBOListing {
+export interface IMHBOListing {
   address: ILatLongAddress
   id: number
   entityType: IEntityType
   listingTypeId?: IListingTypeID
 }
 
-export interface IUnparsedMobileHomeMHBOListing {
+export interface IUnparsedMHBOListing {
   address: IUnparsedLatLongAddress
   id: number
   entityType: string
   listingTypeId: string
 }
 
-export interface IMHBOListing {
-  address: IAddress
-  id: number
-  entityType: IEntityType
-  listingTypeId?: IListingTypeID
-}
-
-export interface IUnparsedMHBOListing {
-  address: IUnparsedAddress
-  id: number
-  entityType: string
-  listingTypeId: string
-}
-
 export interface IMobileHome extends IMHBOListing {
+  address: IAddress
   askingPrice: number
   featured: boolean
   manufacturerName: string
@@ -164,6 +151,7 @@ export interface IMobileHome extends IMHBOListing {
 }
 
 export interface IUnparsedMobileHome extends IUnparsedMHBOListing {
+  address: IUnparsedAddress
   askingPrice: number
   featured: boolean
   manufacturerName: string
@@ -175,13 +163,14 @@ export interface IUnparsedMobileHome extends IUnparsedMHBOListing {
 }
 
 export interface ICommunity extends IMHBOListing {
+  address: IAddress
   ageRestrictionType: null | IAgeRestrictionType
   createdAt: string
   description: string | null
   featured: boolean
   isPublished: boolean
   isDealer: boolean
-  mobilehomes: IMobileHomeMHBOListing[]
+  mobilehomes: IMHBOListing[]
   minSalePrice: null | number
   name: string
   numExistingPhotos: number
@@ -192,13 +181,14 @@ export interface ICommunity extends IMHBOListing {
 }
 
 export interface IUnparsedCommunity extends IUnparsedMHBOListing {
+  address: IUnparsedAddress
   ageRestrictionType: null | IAgeRestrictionType
   createdAt: string
   description: string | null
   featured: boolean
   isPublished: boolean
   isDealer: boolean
-  mobilehomes: IUnparsedMobileHomeMHBOListing[]
+  mobilehomes: IUnparsedMHBOListing[]
   minSalePrice: null | number
   name: string
   numExistingPhotos: number
@@ -222,3 +212,9 @@ export type IFetchExecutor = (
   input: RequestInfo,
   init?: RequestInit
 ) => Promise<Response>
+
+export interface IFunctionsLookup {
+  Community: (result: any) => ICommunity
+  MHBOListing: (result: any) => IMHBOListing
+  MobileHome: (result: any) => IMobileHome
+}

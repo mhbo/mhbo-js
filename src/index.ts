@@ -12,7 +12,6 @@ import {
   IMHBOApiClient,
   IMHBOListing,
   IMobileHome,
-  IMobileHomeMHBOListing,
   IModelTypeID,
   ISellerTypeID
 } from "./types"
@@ -52,8 +51,7 @@ export {
   ISellerTypeID,
   IMHBOListing,
   IEntityType,
-  IAgeRestrictionType,
-  IMobileHomeMHBOListing
+  IAgeRestrictionType
 }
 
 export default Client

@@ -6,10 +6,19 @@ import {
   ICredentials,
   IEnvironment,
   IFetchExecutor,
+  IFunctionsLookup,
   IMHBOListing,
+  IMobileHome,
   IUnparsedCommunity,
-  IUnparsedMHBOListing
+  IUnparsedMHBOListing,
+  IUnparsedMobileHome
 } from "./types"
+
+const functionsLookup: IFunctionsLookup = {
+  Community: parseICommunity,
+  MHBOListing: parseIMHBOListing,
+  MobileHome: parseIMobileHome
+}
 
 /**
  * Performs a GET request to mhbo api.
@@ -19,9 +28,10 @@ import {
  * @param fetchExecutor An instance of the request executor.
  * @returns An array of mobile home results.
  */
-async function requestGet<T extends any, U extends any>(
+async function requestGet<T>(
   url: string,
   creds: ICredentials,
+  returnType: keyof (IFunctionsLookup),
   environment?: IEnvironment,
   fetchExecutor?: IFetchExecutor
 ): Promise<T[]> {
@@ -33,40 +43,64 @@ async function requestGet<T extends any, U extends any>(
     fetchExecutor
   )
   const json = await response.json()
+  const parseFunction = functionsLookup[returnType]
   return (
     json.map(
       (result: any): T => {
-        const { ...community } = camelizeKeys(result) as U
-        const { address, entityType, listingTypeId } = community
-        const { latitude, longitude, lotNum } = address
-        const parsedResult = {
-          ...community,
-          address: {
-            ...address,
-            latitude: parseFloat(latitude),
-            longitude: parseFloat(longitude),
-            lotNum: lotNum === null ? lotNum : parseFloat(lotNum)
-          },
-          entityType: parseFloat(entityType),
-          listingTypeId: parseFloat(listingTypeId)
-        }
-        if (community.mobilehomes) {
-          const parsedMobilehomes = community.mobilehomes.map(
-            ({ address: add, ...home }: IUnparsedCommunity) => ({
-              ...home,
-              address: {
-                ...add,
-                latitude: parseFloat(add.latitude),
-                longitude: parseFloat(add.longitude)
-              }
-            })
-          )
-          parsedResult.mobilehomes = parsedMobilehomes
-        }
-        return (parsedResult as unknown) as T
+        return (parseFunction(result) as unknown) as T
       }
     ) || []
   )
+}
+
+function parseIMHBOListing(result: any): IMHBOListing {
+  const { ...listing } = camelizeKeys(result) as IUnparsedMHBOListing
+  const { address, entityType, listingTypeId } = listing
+  const { latitude, longitude } = address
+  return {
+    ...listing,
+    address: {
+      latitude: parseFloat(latitude),
+      longitude: parseFloat(longitude)
+    },
+    entityType: parseFloat(entityType),
+    listingTypeId: parseFloat(listingTypeId)
+  } as IMHBOListing
+}
+
+function parseIMobileHome(result: any): IMobileHome {
+  const { ...home } = camelizeKeys(result) as IUnparsedMobileHome
+  const { address, entityType, listingTypeId } = home
+  const { latitude, longitude, lotNum } = address
+  return {
+    ...home,
+    address: {
+      ...address,
+      latitude: parseFloat(latitude),
+      longitude: parseFloat(longitude),
+      lotNum: lotNum === null ? lotNum : parseFloat(lotNum)
+    },
+    entityType: parseFloat(entityType),
+    listingTypeId: parseFloat(listingTypeId)
+  } as IMobileHome
+}
+
+function parseICommunity(result: any): ICommunity {
+  const { ...community } = camelizeKeys(result) as IUnparsedCommunity
+  const { address, entityType, listingTypeId, mobilehomes = [] } = community
+  const { latitude, longitude, lotNum } = address
+  return {
+    ...community,
+    address: {
+      ...address,
+      latitude: parseFloat(latitude),
+      longitude: parseFloat(longitude),
+      lotNum: lotNum === null ? lotNum : parseFloat(lotNum)
+    },
+    entityType: parseFloat(entityType),
+    listingTypeId: parseFloat(listingTypeId),
+    mobilehomes: mobilehomes.map(home => parseIMHBOListing(home))
+  } as ICommunity
 }
 
 export { requestGet }
