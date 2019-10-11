@@ -49,6 +49,8 @@ describe("the MHBO API Client", () => {
         zipCode: "32159"
       },
       askingPrice: 124995,
+      communityId: 21308,
+      communityName: "Water Oak Country Club",
       entityType: 1,
       featured: false,
       id: 198718,
