@@ -140,6 +140,8 @@ export interface IUnparsedMHBOListing {
 export interface IMobileHome extends IMHBOListing {
   address: IAddress
   askingPrice: number
+  communityName: string
+  communityId: number
   featured: boolean
   manufacturerName: string
   modelType: string
