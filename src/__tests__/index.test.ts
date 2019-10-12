@@ -62,6 +62,7 @@ describe("the MHBO API Client", () => {
       photoLarge:
         "https://www.suncommunities.com/wp-content/uploads/2017/11/01-Field-Cape-Coral.jpg",
       rentalPrice: null,
+      totalFootage: 408,
       url:
         "http://staging.mhbo.com/mobile-home/198718-604-nicklaus-court-lot-2121-lady-lake-fl-32159-double-wide"
     }
@@ -85,6 +86,11 @@ describe("the MHBO API Client", () => {
         zipCode: "32159"
       },
       ageRestrictionType: null,
+      contact: {
+        daytimePhone: "(080) 888 9999",
+        lastName: "Sutherland",
+        name: "Buffy"
+      },
       createdAt: "2013-09-22T03:27:48.000-07:00",
       description:
         "\u003Cp\u003EWater Oak Country Club Estates is a gated, age-restricted (55+) manufactured home community located in Lady Lake, FL. ",
