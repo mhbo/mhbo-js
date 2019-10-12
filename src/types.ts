@@ -130,6 +130,12 @@ export interface IMHBOListing {
   listingTypeId?: IListingTypeID
 }
 
+export interface IContact {
+  name: string
+  lastName: string
+  daytimePhone: string
+}
+
 export interface IUnparsedMHBOListing {
   address: IUnparsedLatLongAddress
   id: number
@@ -149,6 +155,7 @@ export interface IMobileHome extends IMHBOListing {
   numBedrooms: number
   photoLarge: string
   rentalPrice: number | null
+  totalFootage: number
   url: string
 }
 
@@ -162,12 +169,15 @@ export interface IUnparsedMobileHome extends IUnparsedMHBOListing {
   numBedrooms: number
   photoLarge: string
   rentalPrice: number | null
+  totalFootage: number
+  url: string
 }
 
 export interface ICommunity extends IMHBOListing {
   address: IAddress
   ageRestrictionType: null | IAgeRestrictionType
   createdAt: string
+  contact: IContact
   description: string | null
   featured: boolean
   isPublished: boolean
@@ -185,6 +195,7 @@ export interface ICommunity extends IMHBOListing {
 export interface IUnparsedCommunity extends IUnparsedMHBOListing {
   address: IUnparsedAddress
   ageRestrictionType: null | IAgeRestrictionType
+  contact: IContact
   createdAt: string
   description: string | null
   featured: boolean
