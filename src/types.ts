@@ -77,8 +77,9 @@ export interface ISearchParams {
 }
 
 export interface ICredentials {
-  apiAccessKey: string
-  apiSecret: string
+  apiAccessKey?: string
+  apiSecret?: string
+  token?: string
 }
 
 export interface IUnparsedLatLongAddress {

@@ -25,14 +25,12 @@ import {
  * @returns {IMHBOApiClient} A wrapper for interacting with the MHBO API.
  */
 function Client(
-  apiAccessKey: string,
-  apiSecret: string,
+  credentials: ICredentials,
   environment?: IEnvironment
 ): IMHBOApiClient {
-  const creds: ICredentials = { apiAccessKey, apiSecret }
   return {
-    communities: communities(creds, environment),
-    homes: homes(creds, environment)
+    communities: communities(credentials, environment),
+    homes: homes(credentials, environment)
   }
 }
 
