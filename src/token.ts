@@ -22,6 +22,12 @@ const issueTimestamp = (offset: number): number =>
  * @returns {string} A signed JWT.
  */
 export function token(creds: ICredentials): string {
+  if (creds.token) {
+    return creds.token
+  }
+  if (!creds.apiSecret) {
+    return ""
+  }
   return jwt.sign(
     {
       iat: issueTimestamp(-5),
