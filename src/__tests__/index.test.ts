@@ -8,8 +8,14 @@ import Client, {
 import { IHomeTypeID } from "../types"
 
 describe("the MHBO API Client", () => {
-  it("should provide all supported API resources", () => {
-    const client = Client("accessKey", "secret")
+  it("should provide all supported API resources using access keys", () => {
+    const client = Client({ apiAccessKey: "accessKey", apiSecret: "secret" })
+    expect(client.homes).toBeDefined()
+    expect(client.communities).toBeDefined()
+  })
+
+  it("should provide all supported API resources using token", () => {
+    const client = Client({ token: "apiToken" })
     expect(client.homes).toBeDefined()
     expect(client.communities).toBeDefined()
   })
