@@ -5,8 +5,6 @@ import { ISearchParams } from "../types"
 
 const queryBuilder = (params: ISearchParams) => {
   return communitiesQueryBuilder(params)
-    .replace(/model_type_ids/g, "model_type_id%5B%5D")
-    .replace(/listing_type_ids/g, "listing_type_id%5B%5D")
 }
 
 export default queryBuilder

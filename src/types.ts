@@ -49,13 +49,24 @@ export enum IAgeRestrictionType {
   AllAges = 1
 }
 
+export enum ILocationStatusID {
+  InACommunity = 1,
+  OwnerOwnedLand = 2,
+  LeasedRentedLand = 3,
+  NotInACommunity = 4,
+  OnDealerLot = 5
+}
+
 export interface ISearchParams {
   ageRestrictionType?: IAgeRestrictionType[]
   withPetFriendly?: boolean
   isResidentOwned?: boolean
+  isMhrv?: boolean
+  isTinyHouseCommunity?: boolean
   lenderRepos?: boolean
   listingTypeIds?: IListingTypeID[]
   location?: string
+  locationStatusId?: ILocationStatusID[]
   maxPrice?: number
   minPrice?: number
   modelTypeIds?: IModelTypeID[]
@@ -150,6 +161,7 @@ export interface IMobileHome extends IMHBOListing {
   communityName: string
   communityId: number
   featured: boolean
+  locationStatusId: ILocationStatusID
   manufacturerName: string
   modelType: string
   numBathrooms: number
@@ -164,6 +176,7 @@ export interface IUnparsedMobileHome extends IUnparsedMHBOListing {
   address: IUnparsedAddress
   askingPrice: number
   featured: boolean
+  locationStatusId: string
   manufacturerName: string
   modelType: string
   numBathrooms: number
@@ -183,6 +196,10 @@ export interface ICommunity extends IMHBOListing {
   featured: boolean
   isPublished: boolean
   isDealer: boolean
+  isMhrv: boolean
+  isResidentOwned: boolean
+  isTinyHouseCommunity: boolean
+  withPetFriendly: boolean
   mobilehomes: IMHBOListing[]
   minSalePrice: null | number
   name: string
@@ -202,6 +219,9 @@ export interface IUnparsedCommunity extends IUnparsedMHBOListing {
   featured: boolean
   isPublished: boolean
   isDealer: boolean
+  isMhrv: boolean
+  isResidentOwned: boolean
+  isTinyHouseCommunity: boolean
   mobilehomes: IUnparsedMHBOListing[]
   minSalePrice: null | number
   name: string

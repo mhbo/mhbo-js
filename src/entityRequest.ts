@@ -70,7 +70,7 @@ function parseIMHBOListing(result: any): IMHBOListing {
 
 function parseIMobileHome(result: any): IMobileHome {
   const { ...home } = camelizeKeys(result) as IUnparsedMobileHome
-  const { address, entityType, listingTypeId } = home
+  const { address, entityType, listingTypeId, locationStatusId } = home
   const { latitude, longitude, lotNum } = address
   return {
     ...home,
@@ -81,7 +81,8 @@ function parseIMobileHome(result: any): IMobileHome {
       lotNum: lotNum === null ? lotNum : parseFloat(lotNum)
     },
     entityType: parseFloat(entityType),
-    listingTypeId: parseFloat(listingTypeId)
+    listingTypeId: parseFloat(listingTypeId),
+    locationStatusId: parseFloat(locationStatusId)
   } as IMobileHome
 }
 
