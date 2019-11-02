@@ -61,6 +61,7 @@ describe("the MHBO API Client", () => {
       featured: false,
       id: 198718,
       listingTypeId: 1,
+      locationStatusId: 2,
       manufacturerName: "Skyline",
       modelType: "Double wide",
       numBathrooms: 2,
@@ -104,7 +105,10 @@ describe("the MHBO API Client", () => {
       featured: true,
       id: 37475,
       isDealer: false,
+      isMhrv: false,
       isPublished: true,
+      isResidentOwned: false,
+      isTinyHouseCommunity: false,
       minSalePrice: 44000,
       mobilehomes: [
         {
@@ -124,7 +128,8 @@ describe("the MHBO API Client", () => {
       source: "suncommunities",
       updatedAt: "2019-09-21T02:22:32.000-07:00",
       url:
-        "http://staging.mhbo.com/mobile-home-park/37475-water-oak-country-club-106-evergreen-lane-lady-lake-fl-32159"
+        "http://staging.mhbo.com/mobile-home-park/37475-water-oak-country-club-106-evergreen-lane-lady-lake-fl-32159",
+      withPetFriendly: false
     }
     expect(community).toBeDefined()
   })
