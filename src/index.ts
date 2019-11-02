@@ -9,6 +9,7 @@ import {
   IEntityType,
   IEnvironment,
   IListingTypeID,
+  ILocationStatusID,
   IMHBOApiClient,
   IMHBOListing,
   IMobileHome,
@@ -49,7 +50,8 @@ export {
   ISellerTypeID,
   IMHBOListing,
   IEntityType,
-  IAgeRestrictionType
+  IAgeRestrictionType,
+  ILocationStatusID
 }
 
 export default Client
