@@ -168,6 +168,7 @@ export interface IMobileHome extends IMHBOListing {
   numBedrooms: number
   photoLarge: string
   rentalPrice: number | null
+  sellerTypeId: ISellerTypeID
   totalFootage: number
   url: string
 }
@@ -182,6 +183,7 @@ export interface IUnparsedMobileHome extends IUnparsedMHBOListing {
   numBathrooms: number
   numBedrooms: number
   photoLarge: string
+  sellerTypeId: ISellerTypeID
   rentalPrice: number | null
   totalFootage: number
   url: string
