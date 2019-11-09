@@ -69,6 +69,7 @@ describe("the MHBO API Client", () => {
       photoLarge:
         "https://www.suncommunities.com/wp-content/uploads/2017/11/01-Field-Cape-Coral.jpg",
       rentalPrice: null,
+      sellerTypeId: 1,
       totalFootage: 408,
       url:
         "http://staging.mhbo.com/mobile-home/198718-604-nicklaus-court-lot-2121-lady-lake-fl-32159-double-wide"
