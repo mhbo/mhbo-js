@@ -1,6 +1,7 @@
 import communities from "./communities/index"
 import { HOME_TYPE, LISTING_TYPES, MODEL_TYPES } from "./constants"
 import homes from "./homes/index"
+import users from "./users/index"
 
 import {
   IAgeRestrictionType,
@@ -8,6 +9,7 @@ import {
   ICredentials,
   IEntityType,
   IEnvironment,
+  IFavorite,
   IListingTypeID,
   ILocationStatusID,
   IMHBOApiClient,
@@ -31,7 +33,8 @@ function Client(
 ): IMHBOApiClient {
   return {
     communities: communities(credentials, environment),
-    homes: homes(credentials, environment)
+    homes: homes(credentials, environment),
+    users: users(credentials, environment)
   }
 }
 
@@ -51,7 +54,8 @@ export {
   IMHBOListing,
   IEntityType,
   IAgeRestrictionType,
-  ILocationStatusID
+  ILocationStatusID,
+  IFavorite
 }
 
 export default Client

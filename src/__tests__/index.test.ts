@@ -5,7 +5,7 @@ import Client, {
   IModelTypeID,
   ISellerTypeID
 } from "../index"
-import { IHomeTypeID } from "../types"
+import { IHomeTypeID, IFavorite } from "../types"
 
 describe("the MHBO API Client", () => {
   it("should provide all supported API resources using access keys", () => {
@@ -133,5 +133,13 @@ describe("the MHBO API Client", () => {
       withPetFriendly: false
     }
     expect(community).toBeDefined()
+    const favorite: IFavorite = {
+      entityType: 5,
+      id: 726,
+      userId: 1,
+      watchableId: 146898,
+      watchableType: "Mobilehome"
+    }
+    expect(favorite).toBeDefined()
   })
 })

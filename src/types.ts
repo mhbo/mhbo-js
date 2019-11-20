@@ -1,5 +1,3 @@
-import communities from "./communities"
-
 export enum IEnvironment {
   Production = "PRODUCTION",
   Staging = "STAGING",
@@ -233,15 +231,30 @@ export interface IUnparsedCommunity extends IUnparsedMHBOListing {
   updatedAt: string
 }
 
+export interface IFavorite {
+  entityType: number
+  id: number
+  userId: number
+  watchableId: number
+  watchableType: string
+}
+
 export interface IRestResource<T> {
   byIds: (params: number[]) => Promise<T[]>
   search: (params: ISearchParams) => Promise<T[]>
   searchSummary: (params: ISearchParams) => Promise<T[]>
 }
 
+export interface IFavoritesResource<T> {
+  getFavorites: () => Promise<T[]>
+  addFavorite: (id: number, type: "Community" | "MobileHome") => Promise<T>
+  deleteFavorite: (id: number) => Promise<any>
+}
+
 export interface IMHBOApiClient {
   homes: IRestResource<IMobileHome | IMHBOListing>
   communities: IRestResource<ICommunity | IMHBOListing>
+  users: IFavoritesResource<IFavorite>
 }
 
 export type IFetchExecutor = (
@@ -253,4 +266,5 @@ export interface IFunctionsLookup {
   Community: (result: any) => ICommunity
   MHBOListing: (result: any) => IMHBOListing
   MobileHome: (result: any) => IMobileHome
+  Favorites: (result: any) => IFavorite
 }
