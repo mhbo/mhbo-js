@@ -1,5 +1,4 @@
-import jsonwebtoken from "jsonwebtoken"
-import { requestGet, requestPost, requestDelete } from "../entityRequest"
+import { requestDelete, requestGet, requestPost } from "../entityRequest"
 import {
   ICredentials,
   IEnvironment,
@@ -13,17 +12,15 @@ const users = (
   Ienvironment?: IEnvironment,
   fetchExecutor?: IFetchExecutor
 ): IFavoritesResource<IFavorite> => ({
-  addFavorite: (id: number, type: "Community" | "MobileHome") => {
-    const decoded: any = jsonwebtoken.decode(creds.token ? creds.token : "")
-    if (!decoded) {
-      return new Promise(resolve => {
-        resolve()
-      })
-    }
+  addFavorite: (
+    id: number,
+    type: "Community" | "MobileHome",
+    userId: number
+  ) => {
     const body =
       type === "Community" ? { community_id: id } : { mobilehome_id: id }
     return requestPost<IFavorite>(
-      `v1/users/${decoded.user_id}/favorites`,
+      `v1/users/${userId}/favorites`,
       creds,
       "Favorites",
       Ienvironment,
@@ -31,29 +28,17 @@ const users = (
       body
     )
   },
-  deleteFavorite: (id: number) => {
-    const decoded: any = jsonwebtoken.decode(creds.token ? creds.token : "")
-    if (!decoded) {
-      return new Promise(resolve => {
-        resolve([])
-      })
-    }
+  deleteFavorite: (id: number, userId: number) => {
     return requestDelete<IFavorite>(
-      `v1/users/${decoded.user_id}/favorites/${id}`,
+      `v1/users/${userId}/favorites/${id}`,
       creds,
       Ienvironment,
       fetchExecutor
     )
   },
-  getFavorites: () => {
-    const decoded: any = jsonwebtoken.decode(creds.token ? creds.token : "")
-    if (!decoded) {
-      return new Promise(resolve => {
-        resolve([])
-      })
-    }
+  getFavorites: (userId: number) => {
     return requestGet<IFavorite>(
-      `v1/users/${decoded.user_id}/favorites`,
+      `v1/users/${userId}/favorites`,
       creds,
       "Favorites",
       Ienvironment,

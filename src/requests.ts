@@ -40,10 +40,6 @@ export function authenticatedRequest(
 ): Promise<Response> {
   const request: IFetchExecutor = fetchExecutor || fetch
   const url = baseURL(environment) + uri
-  /* tslint:disable:no-console */
-  console.log(`[MHBO-JS] ${method} | ${url}`)
-  console.log(qs.stringify(body))
-  /* tslint:enable:no-console */
   return request(url, {
     body: method === "POST" ? qs.stringify(body) : null,
     headers: {

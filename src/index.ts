@@ -1,6 +1,7 @@
 import communities from "./communities/index"
 import { HOME_TYPE, LISTING_TYPES, MODEL_TYPES } from "./constants"
 import homes from "./homes/index"
+import token from "./token/index"
 import users from "./users/index"
 
 import {
@@ -16,7 +17,8 @@ import {
   IMHBOListing,
   IMobileHome,
   IModelTypeID,
-  ISellerTypeID
+  ISellerTypeID,
+  IToken
 } from "./types"
 
 /**
@@ -34,6 +36,7 @@ function Client(
   return {
     communities: communities(credentials, environment),
     homes: homes(credentials, environment),
+    token: token(credentials),
     users: users(credentials, environment)
   }
 }
@@ -55,7 +58,8 @@ export {
   IEntityType,
   IAgeRestrictionType,
   ILocationStatusID,
-  IFavorite
+  IFavorite,
+  IToken
 }
 
 export default Client

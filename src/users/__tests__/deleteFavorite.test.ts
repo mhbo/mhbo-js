@@ -18,14 +18,14 @@ const users = resource(
 
 describe("the users resource #deleteFavorite", () => {
   beforeEach(() => {
-    users.deleteFavorite(6)
+    users.deleteFavorite(6, 100)
   })
 
   it("should make 1 fetch request", () => {
     expect(mockFetch.mock.calls.length).toBe(1)
   })
 
-  it("should call the search endpoint with correct data in body", () => {
+  it("should call the delete favorite endpoint with correct data in body", () => {
     expect(mockFetch.mock.calls[0][0]).toBe(
       "http://localhost:3000/api/v1/users/100/favorites/6"
     )

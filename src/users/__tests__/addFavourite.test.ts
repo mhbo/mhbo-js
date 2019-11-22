@@ -18,14 +18,14 @@ const users = resource(
 
 describe("the users resource #addFavorite community", () => {
   beforeEach(() => {
-    users.addFavorite(6, "Community")
+    users.addFavorite(6, "Community", 100)
   })
 
   it("should make 1 fetch request", () => {
     expect(mockFetch.mock.calls.length).toBe(1)
   })
 
-  it("should call the search endpoint with correct data in body", () => {
+  it("should call the add favorite endpoint with correct data in body", () => {
     expect(mockFetch.mock.calls[0][0]).toBe(
       "http://localhost:3000/api/v1/users/100/favorites"
     )

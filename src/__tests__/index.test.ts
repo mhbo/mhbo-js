@@ -1,11 +1,13 @@
 import Client, {
   ICommunity,
+  IFavorite,
   IListingTypeID,
   IMobileHome,
   IModelTypeID,
-  ISellerTypeID
+  ISellerTypeID,
+  IToken
 } from "../index"
-import { IHomeTypeID, IFavorite } from "../types"
+import { IHomeTypeID } from "../types"
 
 describe("the MHBO API Client", () => {
   it("should provide all supported API resources using access keys", () => {
@@ -141,5 +143,9 @@ describe("the MHBO API Client", () => {
       watchableType: "Mobilehome"
     }
     expect(favorite).toBeDefined()
+    const token: IToken = {
+      userId: 100
+    }
+    expect(token).toBeDefined()
   })
 })
