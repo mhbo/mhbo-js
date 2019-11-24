@@ -1,9 +1,11 @@
 import Client, {
   ICommunity,
+  IFavorite,
   IListingTypeID,
   IMobileHome,
   IModelTypeID,
-  ISellerTypeID
+  ISellerTypeID,
+  IToken
 } from "../index"
 import { IHomeTypeID } from "../types"
 
@@ -133,5 +135,17 @@ describe("the MHBO API Client", () => {
       withPetFriendly: false
     }
     expect(community).toBeDefined()
+    const favorite: IFavorite = {
+      entityType: 5,
+      id: 726,
+      userId: 1,
+      watchableId: 146898,
+      watchableType: "Mobilehome"
+    }
+    expect(favorite).toBeDefined()
+    const token: IToken = {
+      userId: 100
+    }
+    expect(token).toBeDefined()
   })
 })
