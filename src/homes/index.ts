@@ -1,4 +1,5 @@
 import { requestGet } from "../entityRequest"
+import queryBuilder from "../queryBuilder"
 import {
   ICredentials,
   IEnvironment,
@@ -8,7 +9,6 @@ import {
   IRestResource,
   ISearchParams
 } from "../types"
-import queryBuilder from "./queryBuilder"
 
 const homes = (
   creds: ICredentials,
