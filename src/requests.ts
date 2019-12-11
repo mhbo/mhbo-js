@@ -15,7 +15,7 @@ function baseURL(environment?: IEnvironment): string {
     case IEnvironment.Staging:
       return "https://staging.mhbo.com/api/"
     default:
-      return "https://mhbo.com/api/"
+      return "https://www.mhbo.com/api/"
   }
 }
 
