@@ -26,7 +26,7 @@ mhbo.homes.search().then(homes => {
 The MHBO API utilizes an authentication schema requiring a JWT that is passed as a Bearer token:
 
 ```
-curl https://mhbo.com/api/v1/mobile_homes \
+curl https://www.mhbo.com/api/v1/mobile_homes \
   -H "Authorization: Bearer <GENERATED_JWT_TOKEN>"
 ```
 
@@ -39,7 +39,7 @@ To generate a token you must obtain a `MHBO_ACCESS_KEY` and `MHBO_SECRET_KEY` fr
 To read communities you have added or can manage make the following request:
 
 ```
-curl https://mhbo.com/api/v1/communities \
+curl https://www.mhbo.com/api/v1/communities \
   -H "Authorization: Bearer <GENERATED_JWT_TOKEN>"
 ```
 
@@ -85,7 +85,7 @@ Which will resolve with the following output:
 To create a new community:
 
 ```
-curl https://mhbo.com/api/v1/communities \
+curl https://www.mhbo.com/api/v1/communities \
   -H "Authorization: Bearer <GENERATED_JWT_TOKEN>"
   -X POST
   -d '{"name":"MY Community", address:{}, contact:{}, ...}'
@@ -129,7 +129,7 @@ An acceptable format for the JSON body would be as follows:
 To update a community:
 
 ```
-curl https://mhbo.com/api/v1/communities/<COMMUNITY_ID> \
+curl https://www.mhbo.com/api/v1/communities/<COMMUNITY_ID> \
   -H "Authorization: Bearer <GENERATED_JWT_TOKEN>"
   -X PUT
   -d '{"name":"MY Community", ...}'
@@ -175,7 +175,7 @@ An acceptable format for the JSON body would be as follows:
 To read mobilehome listings you have added make the following request:
 
 ```
-curl https://mhbo.com/api/v1/mobile_homes \
+curl https://www.mhbo.com/api/v1/mobile_homes \
   -H "Authorization: Bearer <GENERATED_JWT_TOKEN>"
 ```
 
@@ -232,7 +232,7 @@ Which will resolve with the following output:
 To create a new mobile home:
 
 ```
-curl https://mhbo.com/api/v1/mobile_homes \
+curl https://www.mhbo.com/api/v1/mobile_homes \
   -H "Authorization: Bearer <GENERATED_JWT_TOKEN>"
   -X POST
   -d '{"address":{}, "contact":{}, "num_bathrooms: 1, ...}'
@@ -279,7 +279,7 @@ An acceptable JSON body to POST a new property:
 To update a mobile home:
 
 ```
-curl https://mhbo.com/api/v1/mobile_homes/<MOBILE_HOME_ID> \
+curl https://www.mhbo.com/api/v1/mobile_homes/<MOBILE_HOME_ID> \
   -H "Authorization: Bearer <GENERATED_JWT_TOKEN>"
   -X PUT
   -d '{"name":"Mobile Home"}'
@@ -327,7 +327,7 @@ An acceptable JSON body to POST a new property:
 To access all available leads in our system available to your company make the following request:
 
 ```
-curl https://mhbo.com/api/v1/leads \
+curl https://www.mhbo.com/api/v1/leads \
   -H "Authorization: Bearer <GENERATED_JWT_TOKEN>"
 ```
 

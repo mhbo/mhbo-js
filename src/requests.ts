@@ -1,4 +1,5 @@
 import "isomorphic-fetch"
+import * as qs from "querystring"
 import { IEnvironment, IFetchExecutor } from "./types"
 
 /**
@@ -14,7 +15,7 @@ function baseURL(environment?: IEnvironment): string {
     case IEnvironment.Staging:
       return "https://staging.mhbo.com/api/"
     default:
-      return "https://mhbo.com/api/"
+      return "https://www.mhbo.com/api/"
   }
 }
 
@@ -34,16 +35,16 @@ export function authenticatedRequest(
   method: string,
   uri: string,
   environment?: IEnvironment,
-  fetchExecutor?: IFetchExecutor
+  fetchExecutor?: IFetchExecutor,
+  body?: any
 ): Promise<Response> {
   const request: IFetchExecutor = fetchExecutor || fetch
   const url = baseURL(environment) + uri
-  /* tslint:disable:no-console */
-  console.log(`[MHBO-JS] ${method} | ${url}`)
-  /* tslint:enable:no-console */
   return request(url, {
+    body: method === "POST" ? qs.stringify(body) : null,
     headers: {
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/x-www-form-urlencoded"
     },
     method
   })

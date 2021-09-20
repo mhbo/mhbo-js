@@ -5,6 +5,7 @@ import {
   ICommunity,
   ICredentials,
   IEnvironment,
+  IFavorite,
   IFetchExecutor,
   IFunctionsLookup,
   IMHBOListing,
@@ -16,6 +17,7 @@ import {
 
 const functionsLookup: IFunctionsLookup = {
   Community: parseICommunity,
+  Favorites: parseIFavorite,
   MHBOListing: parseIMHBOListing,
   MobileHome: parseIMobileHome
 }
@@ -51,6 +53,60 @@ async function requestGet<T>(
       }
     ) || []
   )
+}
+
+/**
+ * Performs a POST request to mhbo api.
+ *
+ * @param creds The authentication credential for the API request.
+ * @param environment An optional override of the environment to utilize.
+ * @param fetchExecutor An instance of the request executor.
+ * @returns The updated result.
+ */
+async function requestPost<T>(
+  url: string,
+  creds: ICredentials,
+  returnType: keyof (IFunctionsLookup),
+  environment?: IEnvironment,
+  fetchExecutor?: IFetchExecutor,
+  body?: any
+): Promise<T> {
+  const response = await authenticatedRequest(
+    token(creds),
+    "POST",
+    url,
+    environment,
+    fetchExecutor,
+    body
+  )
+  const json = await response.json()
+  const parseFunction = functionsLookup[returnType]
+  return (parseFunction(json) as unknown) as T
+}
+
+/**
+ * Performs a DELETE request to mhbo api.
+ *
+ * @param creds The authentication credential for the API request.
+ * @param environment An optional override of the environment to utilize.
+ * @param fetchExecutor An instance of the request executor.
+ * @returns indicator message
+ */
+async function requestDelete<T>(
+  url: string,
+  creds: ICredentials,
+  environment?: IEnvironment,
+  fetchExecutor?: IFetchExecutor
+): Promise<T> {
+  const response = await authenticatedRequest(
+    token(creds),
+    "DELETE",
+    url,
+    environment,
+    fetchExecutor
+  )
+  const json = await response.json()
+  return json
 }
 
 function parseIMHBOListing(result: any): IMHBOListing {
@@ -104,4 +160,12 @@ function parseICommunity(result: any): ICommunity {
   } as ICommunity
 }
 
-export { requestGet }
+function parseIFavorite(result: any): IFavorite {
+  const { ...listing } = camelizeKeys(result) as IFavorite
+
+  return {
+    ...listing
+  } as IFavorite
+}
+
+export { requestGet, requestPost, requestDelete }
