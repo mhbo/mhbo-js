@@ -138,6 +138,7 @@ export interface IMHBOListing {
   id: number
   entityType: IEntityType
   listingTypeId?: IListingTypeID
+  featured?: boolean
 }
 
 export interface IContact {
