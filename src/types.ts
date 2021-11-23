@@ -211,6 +211,8 @@ export interface ICommunity extends IMHBOListing {
   source: string
   url: string
   updatedAt: string
+  min_lot_rent_fees: null | string
+  max_lot_rent_fees: null | string
 }
 
 export interface IUnparsedCommunity extends IUnparsedMHBOListing {
