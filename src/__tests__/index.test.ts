@@ -112,7 +112,9 @@ describe("the MHBO API Client", () => {
       isPublished: true,
       isResidentOwned: false,
       isTinyHouseCommunity: false,
+      max_lot_rent_fees: "$1,400",
       minSalePrice: 44000,
+      min_lot_rent_fees: "$400",
       mobilehomes: [
         {
           address: {
