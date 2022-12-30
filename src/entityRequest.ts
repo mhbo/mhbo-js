@@ -1,6 +1,7 @@
 import { camelizeKeys } from "humps"
 import { authenticatedRequest } from "./requests"
 import { token } from "./token"
+
 import {
   ICommunity,
   ICredentials,
@@ -44,15 +45,17 @@ async function requestGet<T>(
     environment,
     fetchExecutor
   )
-  const json = await response.json()
-  const parseFunction = functionsLookup[returnType]
-  return (
-    json.map(
-      (result: any): T => {
-        return (parseFunction(result) as unknown) as T
-      }
-    ) || []
-  )
+  if (response.json) {
+    const json = await response.json()
+    const parseFunction = functionsLookup[returnType]
+    return (
+      json.map(
+        (result: any): T => {
+          return (parseFunction(result) as unknown) as T
+        }
+      ) || []
+    )
+  } else return []
 }
 
 /**
@@ -79,9 +82,11 @@ async function requestPost<T>(
     fetchExecutor,
     body
   )
-  const json = await response.json()
-  const parseFunction = functionsLookup[returnType]
-  return (parseFunction(json) as unknown) as T
+  if (response.json) {
+    const json = await response.json()
+    const parseFunction = functionsLookup[returnType]
+    return (parseFunction(json) as unknown) as T
+  } else return {} as T
 }
 
 /**
@@ -105,8 +110,10 @@ async function requestDelete<T>(
     environment,
     fetchExecutor
   )
-  const json = await response.json()
-  return json
+  if (response.json) {
+    const json = await response.json()
+    return json
+  } else return {} as T
 }
 
 function parseIMHBOListing(result: any): IMHBOListing {
