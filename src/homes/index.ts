@@ -7,7 +7,7 @@ import {
   IMHBOListing,
   IMobileHome,
   IRestResource,
-  ISearchParams
+  ISearchParams,
 } from "../types"
 
 const homes = (
@@ -23,14 +23,6 @@ const homes = (
       Ienvironment,
       fetchExecutor
     ),
-  search: (params: ISearchParams) =>
-    requestGet<IMobileHome>(
-      `v1/mobile_homes/?${queryBuilder(params)}`,
-      creds,
-      "MobileHome",
-      Ienvironment,
-      fetchExecutor
-    ),
   searchSummary: (params: ISearchParams) =>
     requestGet<IMHBOListing>(
       `v1/mobile_homes/?${queryBuilder({ ...params, detailLevel: "SUMMARY" })}`,
@@ -38,7 +30,7 @@ const homes = (
       "MHBOListing",
       Ienvironment,
       fetchExecutor
-    )
+    ),
 })
 
 export default homes

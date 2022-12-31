@@ -1,20 +1,20 @@
 export enum IEnvironment {
   Production = "PRODUCTION",
   Staging = "STAGING",
-  Development = "DEVELOPMENT"
+  Development = "DEVELOPMENT",
 }
 
 export enum IListingTypeID {
   ForSale = 1,
   ForRent = 2,
   ForRentAndToOwn = 3,
-  ForRentOrForSale = 4
+  ForRentOrForSale = 4,
 }
 
 export enum IEntityType {
   Home = 1,
   Community = 2,
-  Dealer = 3
+  Dealer = 3,
 }
 
 export enum IModelTypeID {
@@ -22,14 +22,14 @@ export enum IModelTypeID {
   DoubleWide = 2,
   TripleWide = 3,
   ParkModel = 4,
-  Unspecified = 5
+  Unspecified = 5,
 }
 
 export enum ISellerTypeID {
   Owner = 1,
   Agent = 2,
   Dealer = 3,
-  Repo = 4
+  Repo = 4,
 }
 
 export interface ICoordinate {
@@ -39,12 +39,12 @@ export interface ICoordinate {
 
 export enum IHomeTypeID {
   Community = 2,
-  MobileHome = 1
+  MobileHome = 1,
 }
 
 export enum IAgeRestrictionType {
   FiftyFivePlus = 2,
-  AllAges = 1
+  AllAges = 1,
 }
 
 export enum ILocationStatusID {
@@ -52,7 +52,7 @@ export enum ILocationStatusID {
   OwnerOwnedLand = 2,
   LeasedRentedLand = 3,
   NotInACommunity = 4,
-  OnDealerLot = 5
+  OnDealerLot = 5,
 }
 
 export interface ISearchParams {
@@ -86,8 +86,6 @@ export interface ISearchParams {
 }
 
 export interface ICredentials {
-  apiAccessKey?: string
-  apiSecret?: string
   token?: string
 }
 
@@ -250,7 +248,6 @@ export interface IToken {
 
 export interface IRestResource<T> {
   byIds: (params: number[]) => Promise<T[]>
-  search: (params: ISearchParams) => Promise<T[]>
   searchSummary: (params: ISearchParams) => Promise<T[]>
 }
 

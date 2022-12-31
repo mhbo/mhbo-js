@@ -13,14 +13,14 @@ import {
   IMobileHome,
   IUnparsedCommunity,
   IUnparsedMHBOListing,
-  IUnparsedMobileHome
+  IUnparsedMobileHome,
 } from "./types"
 
 const functionsLookup: IFunctionsLookup = {
   Community: parseICommunity,
   Favorites: parseIFavorite,
   MHBOListing: parseIMHBOListing,
-  MobileHome: parseIMobileHome
+  MobileHome: parseIMobileHome,
 }
 
 /**
@@ -34,7 +34,7 @@ const functionsLookup: IFunctionsLookup = {
 async function requestGet<T>(
   url: string,
   creds: ICredentials,
-  returnType: keyof (IFunctionsLookup),
+  returnType: keyof IFunctionsLookup,
   environment?: IEnvironment,
   fetchExecutor?: IFetchExecutor
 ): Promise<T[]> {
@@ -49,13 +49,12 @@ async function requestGet<T>(
     const json = await response.json()
     const parseFunction = functionsLookup[returnType]
     return (
-      json.map(
-        (result: any): T => {
-          return (parseFunction(result) as unknown) as T
-        }
-      ) || []
+      json.map((result: any): T => {
+        return parseFunction(result) as unknown as T
+      }) || []
     )
-  } else return []
+  }
+  return []
 }
 
 /**
@@ -69,7 +68,7 @@ async function requestGet<T>(
 async function requestPost<T>(
   url: string,
   creds: ICredentials,
-  returnType: keyof (IFunctionsLookup),
+  returnType: keyof IFunctionsLookup,
   environment?: IEnvironment,
   fetchExecutor?: IFetchExecutor,
   body?: any
@@ -85,8 +84,9 @@ async function requestPost<T>(
   if (response.json) {
     const json = await response.json()
     const parseFunction = functionsLookup[returnType]
-    return (parseFunction(json) as unknown) as T
-  } else return {} as T
+    return parseFunction(json) as unknown as T
+  }
+  return {} as T
 }
 
 /**
@@ -113,7 +113,8 @@ async function requestDelete<T>(
   if (response.json) {
     const json = await response.json()
     return json
-  } else return {} as T
+  }
+  return {} as T
 }
 
 function parseIMHBOListing(result: any): IMHBOListing {
@@ -124,10 +125,10 @@ function parseIMHBOListing(result: any): IMHBOListing {
     ...listing,
     address: {
       latitude: parseFloat(latitude),
-      longitude: parseFloat(longitude)
+      longitude: parseFloat(longitude),
     },
     entityType: parseFloat(entityType),
-    listingTypeId: parseFloat(listingTypeId)
+    listingTypeId: parseFloat(listingTypeId),
   } as IMHBOListing
 }
 
@@ -141,11 +142,11 @@ function parseIMobileHome(result: any): IMobileHome {
       ...address,
       latitude: parseFloat(latitude),
       longitude: parseFloat(longitude),
-      lotNum: lotNum === null ? lotNum : parseFloat(lotNum)
+      lotNum: lotNum === null ? lotNum : parseFloat(lotNum),
     },
     entityType: parseFloat(entityType),
     listingTypeId: parseFloat(listingTypeId),
-    locationStatusId: parseFloat(locationStatusId)
+    locationStatusId: parseFloat(locationStatusId),
   } as IMobileHome
 }
 
@@ -159,11 +160,11 @@ function parseICommunity(result: any): ICommunity {
       ...address,
       latitude: parseFloat(latitude),
       longitude: parseFloat(longitude),
-      lotNum: lotNum === null ? lotNum : parseFloat(lotNum)
+      lotNum: lotNum === null ? lotNum : parseFloat(lotNum),
     },
     entityType: parseFloat(entityType),
     listingTypeId: parseFloat(listingTypeId),
-    mobilehomes: mobilehomes.map(home => parseIMHBOListing(home))
+    mobilehomes: mobilehomes.map((home) => parseIMHBOListing(home)),
   } as ICommunity
 }
 
@@ -171,7 +172,7 @@ function parseIFavorite(result: any): IFavorite {
   const { ...listing } = camelizeKeys(result) as IFavorite
 
   return {
-    ...listing
+    ...listing,
   } as IFavorite
 }
 

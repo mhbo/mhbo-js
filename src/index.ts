@@ -18,7 +18,7 @@ import {
   IMobileHome,
   IModelTypeID,
   ISellerTypeID,
-  IToken
+  IToken,
 } from "./types"
 
 /**
@@ -37,7 +37,7 @@ function Client(
     communities: communities(credentials, environment),
     homes: homes(credentials, environment),
     token: token(credentials),
-    users: users(credentials, environment)
+    users: users(credentials, environment),
   }
 }
 
@@ -59,7 +59,7 @@ export {
   IAgeRestrictionType,
   ILocationStatusID,
   IFavorite,
-  IToken
+  IToken,
 }
 
 export default Client
