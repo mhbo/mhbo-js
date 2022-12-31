@@ -3,16 +3,16 @@ export const MODEL_TYPES = {
   PARK_MODEL: 4,
   SINGLE_WIDE: 1,
   TRIPLE_WIDE: 3,
-  UNSPECIFIED: 5
+  UNSPECIFIED: 5,
 }
 
 export const LISTING_TYPES = {
   FOR_PURCHASE: 1,
   FOR_RENT: 2,
-  FOR_RENT_TO_OWN: 3
+  FOR_RENT_TO_OWN: 3,
 }
 
 export const HOME_TYPE = {
   COMMUNITY: 2,
-  MOBILE_HOME: 1
+  MOBILE_HOME: 1,
 }

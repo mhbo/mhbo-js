@@ -1,5 +1,4 @@
-import "isomorphic-fetch"
-import * as qs from "querystring"
+import queryString from "query-string"
 import { IEnvironment, IFetchExecutor } from "./types"
 
 /**
@@ -41,11 +40,11 @@ export function authenticatedRequest(
   const request: IFetchExecutor = fetchExecutor || fetch
   const url = baseURL(environment) + uri
   return request(url, {
-    body: method === "POST" ? qs.stringify(body) : null,
+    body: method === "POST" ? queryString.stringify(body) : null,
     headers: {
       Authorization: `Bearer ${token}`,
-      "Content-Type": "application/x-www-form-urlencoded"
+      "Content-Type": "application/x-www-form-urlencoded",
     },
-    method
+    method,
   })
 }

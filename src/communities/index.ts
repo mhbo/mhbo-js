@@ -7,7 +7,7 @@ import {
   IFetchExecutor,
   IMHBOListing,
   IRestResource,
-  ISearchParams
+  ISearchParams,
 } from "../types"
 
 const communities = (
@@ -23,14 +23,6 @@ const communities = (
       Ienvironment,
       fetchExecutor
     ),
-  search: (params: ISearchParams) =>
-    requestGet<ICommunity>(
-      `v1/communities/?${queryBuilder(params)}`,
-      creds,
-      "Community",
-      Ienvironment,
-      fetchExecutor
-    ),
   searchSummary: (params: ISearchParams) =>
     requestGet<IMHBOListing>(
       `v1/communities/?${queryBuilder({ ...params, detailLevel: "SUMMARY" })}`,
@@ -38,7 +30,7 @@ const communities = (
       "MHBOListing",
       Ienvironment,
       fetchExecutor
-    )
+    ),
 })
 
 export default communities

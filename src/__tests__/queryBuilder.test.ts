@@ -14,7 +14,7 @@ describe("the query builder", () => {
       numBathrooms: [2],
       numBedrooms: [3],
       preOwned: false,
-      sellerTypeIds: [3]
+      sellerTypeIds: [3],
     })
     expect(query).toEqual(
       "age_restriction_type%5B%5D=1&lender_repos=true&listing_type_id%5B%5D=1&display_location=Mesa%2C%20AZ&max_price=5000&min_price=0&model_type_id%5B%5D=1&model_type_id%5B%5D=2&num_bathrooms%5B%5D=2&num_bedrooms%5B%5D=3&pre_owned=false&seller_type_id%5B%5D=3"
@@ -29,7 +29,7 @@ describe("the query builder", () => {
       location: "Mesa, AZ",
       maxPrice: 5000,
       minPrice: 0,
-      modelTypeIds: [1, 2]
+      modelTypeIds: [1, 2],
     })
     expect(query).toEqual(
       "age_restriction_type%5B%5D=1&listing_type_id%5B%5D=1&display_location=Mesa%2C%20AZ&max_price=5000&min_price=0&model_type_id%5B%5D=1&model_type_id%5B%5D=2"
@@ -46,7 +46,7 @@ describe("the query builder", () => {
       minPrice: 0,
       modelTypeIds: [],
       numBathrooms: [2],
-      numBedrooms: [3]
+      numBedrooms: [3],
     })
     expect(query).toEqual(
       "age_restriction_type%5B%5D=1&display_location=Mesa%2C%20AZ&max_price=5000&min_price=0&num_bathrooms%5B%5D=2&num_bedrooms%5B%5D=3"

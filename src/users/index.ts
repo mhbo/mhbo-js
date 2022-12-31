@@ -4,7 +4,7 @@ import {
   IEnvironment,
   IFavorite,
   IFavoritesResource,
-  IFetchExecutor
+  IFetchExecutor,
 } from "../types"
 
 const users = (
@@ -44,7 +44,7 @@ const users = (
       Ienvironment,
       fetchExecutor
     )
-  }
+  },
 })
 
 export default users

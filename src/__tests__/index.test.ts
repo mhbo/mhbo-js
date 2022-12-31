@@ -5,17 +5,11 @@ import Client, {
   IMobileHome,
   IModelTypeID,
   ISellerTypeID,
-  IToken
+  IToken,
 } from "../index"
 import { IHomeTypeID } from "../types"
 
 describe("the MHBO API Client", () => {
-  it("should provide all supported API resources using access keys", () => {
-    const client = Client({ apiAccessKey: "accessKey", apiSecret: "secret" })
-    expect(client.homes).toBeDefined()
-    expect(client.communities).toBeDefined()
-  })
-
   it("should provide all supported API resources using token", () => {
     const client = Client({ token: "apiToken" })
     expect(client.homes).toBeDefined()
@@ -54,7 +48,7 @@ describe("the MHBO API Client", () => {
         numberAndStreet: "604 Nicklaus Court",
         state: "FL",
         updatedAt: "2019-08-16T01:49:13.000-07:00",
-        zipCode: "32159"
+        zipCode: "32159",
       },
       askingPrice: 124995,
       communityId: 21308,
@@ -73,8 +67,7 @@ describe("the MHBO API Client", () => {
       rentalPrice: null,
       sellerTypeId: 1,
       totalFootage: 408,
-      url:
-        "http://staging.mhbo.com/mobile-home/198718-604-nicklaus-court-lot-2121-lady-lake-fl-32159-double-wide"
+      url: "http://staging.mhbo.com/mobile-home/198718-604-nicklaus-court-lot-2121-lady-lake-fl-32159-double-wide",
     }
     expect(mobileHome).toBeDefined()
     const community: ICommunity = {
@@ -93,13 +86,13 @@ describe("the MHBO API Client", () => {
         numberAndStreet: "106 Evergreen Lane",
         state: "FL",
         updatedAt: "2019-09-07T23:53:32.000-07:00",
-        zipCode: "32159"
+        zipCode: "32159",
       },
       ageRestrictionType: null,
       contact: {
         daytimePhone: "(080) 888 9999",
         lastName: "Sutherland",
-        name: "Buffy"
+        name: "Buffy",
       },
       createdAt: "2013-09-22T03:27:48.000-07:00",
       description:
@@ -119,12 +112,12 @@ describe("the MHBO API Client", () => {
         {
           address: {
             latitude: 28.8751532,
-            longitude: -81.8847011
+            longitude: -81.8847011,
           },
           entityType: 1,
           id: 335121,
-          listingTypeId: 1
-        }
+          listingTypeId: 1,
+        },
       ],
       name: "Water Oak Country Club",
       numExistingPhotos: 19,
@@ -132,9 +125,8 @@ describe("the MHBO API Client", () => {
         "http://dth4n83exov4m.cloudfront.net/photos/images/004/371/787/large/water-oak-country-club-5.jpg?1555695939",
       source: "suncommunities",
       updatedAt: "2019-09-21T02:22:32.000-07:00",
-      url:
-        "http://staging.mhbo.com/mobile-home-park/37475-water-oak-country-club-106-evergreen-lane-lady-lake-fl-32159",
-      withPetFriendly: false
+      url: "http://staging.mhbo.com/mobile-home-park/37475-water-oak-country-club-106-evergreen-lane-lady-lake-fl-32159",
+      withPetFriendly: false,
     }
     expect(community).toBeDefined()
     const favorite: IFavorite = {
@@ -142,11 +134,11 @@ describe("the MHBO API Client", () => {
       id: 726,
       userId: 1,
       watchableId: 146898,
-      watchableType: "Mobilehome"
+      watchableType: "Mobilehome",
     }
     expect(favorite).toBeDefined()
     const token: IToken = {
-      userId: 100
+      userId: 100,
     }
     expect(token).toBeDefined()
   })
