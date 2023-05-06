@@ -99,6 +99,14 @@ export interface ILatLongAddress {
   longitude: number
 }
 
+export interface IUnparsedMHBOSearchSummary {
+  page: string
+  query: string
+  results: IUnparsedMHBOListing[]
+  resultsCount: string
+  totalCount: string
+}
+
 export interface IUnparsedAddress extends IUnparsedLatLongAddress {
   addressableId: number
   addressableType: string
@@ -139,6 +147,14 @@ export interface IMHBOListing {
   featured?: boolean
   price?: number
   name?: string
+}
+
+export interface IMHBOSearchSummaryListing {
+  page: number
+  query: string
+  results: IMHBOListing[]
+  resultsCount: number
+  totalCount: number
 }
 
 export interface IContact {
@@ -252,7 +268,7 @@ export interface IRestResource<T> {
 }
 
 export interface ICommunityRestResource<T> extends IRestResource<T> {
-  searchSummaryV2: (params: ISearchParams) => Promise<T[]>
+  searchSummaryV2: (params: ISearchParams) => Promise<T>
 }
 
 export interface IFavoritesResource<T> {
@@ -271,7 +287,9 @@ export interface ITokenResource<T> {
 
 export interface IMHBOApiClient {
   homes: IRestResource<IMobileHome | IMHBOListing>
-  communities: ICommunityRestResource<ICommunity | IMHBOListing>
+  communities: ICommunityRestResource<
+    ICommunity | IMHBOListing | IMHBOSearchSummaryListing
+  >
   users: IFavoritesResource<IFavorite>
   token: ITokenResource<IToken>
 }

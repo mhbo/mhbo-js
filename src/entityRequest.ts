@@ -14,6 +14,8 @@ import {
   IUnparsedCommunity,
   IUnparsedMHBOListing,
   IUnparsedMobileHome,
+  IUnparsedMHBOSearchSummary,
+  IMHBOSearchSummaryListing,
 } from "./types"
 
 const functionsLookup: IFunctionsLookup = {
@@ -21,6 +23,44 @@ const functionsLookup: IFunctionsLookup = {
   Favorites: parseIFavorite,
   MHBOListing: parseIMHBOListing,
   MobileHome: parseIMobileHome,
+}
+
+/**
+ * Performs a GET request to mhbo api.
+ *
+ * @param creds The authentication credential for the API request.
+ * @param environment An optional override of the environment to utilize.
+ * @param fetchExecutor An instance of the request executor.
+ * @returns An array of mobile home results.
+ */
+async function requestGetSummary<T>(
+  url: string,
+  creds: ICredentials,
+  environment?: IEnvironment,
+  fetchExecutor?: IFetchExecutor
+): Promise<IMHBOSearchSummaryListing> {
+  const response = await authenticatedRequest(
+    token(creds),
+    "GET",
+    url,
+    environment,
+    fetchExecutor
+  )
+  if (response.json) {
+    const json = await response.json()
+    const { page, query, results, resultsCount, totalCount } = camelizeKeys(
+      json
+    ) as IUnparsedMHBOSearchSummary
+    const parsedResults = results.map((listing) => parseIMHBOListing(listing))
+    return {
+      query,
+      page: parseFloat(page),
+      resultsCount: parseFloat(resultsCount),
+      totalCount: parseFloat(totalCount),
+      results: parsedResults,
+    } as IMHBOSearchSummaryListing
+  }
+  return { page: 0, query: "", resultsCount: 0, totalCount: 0, results: [] }
 }
 
 /**
@@ -83,6 +123,8 @@ async function requestPost<T>(
   )
   if (response.json) {
     const json = await response.json()
+    const {} = camelizeKeys(json) as IUnparsedMHBOSearchSummary
+
     const parseFunction = functionsLookup[returnType]
     return parseFunction(json) as unknown as T
   }
@@ -118,6 +160,21 @@ async function requestDelete<T>(
 }
 
 function parseIMHBOListing(result: any): IMHBOListing {
+  const { ...listing } = camelizeKeys(result) as IUnparsedMHBOListing
+  const { address, entityType, listingTypeId } = listing
+  const { latitude, longitude } = address
+  return {
+    ...listing,
+    address: {
+      latitude: parseFloat(latitude),
+      longitude: parseFloat(longitude),
+    },
+    entityType: parseFloat(entityType),
+    listingTypeId: parseFloat(listingTypeId),
+  } as IMHBOListing
+}
+
+function parseSearchSummary(result: any): IMHBOListing {
   const { ...listing } = camelizeKeys(result) as IUnparsedMHBOListing
   const { address, entityType, listingTypeId } = listing
   const { latitude, longitude } = address
@@ -176,4 +233,4 @@ function parseIFavorite(result: any): IFavorite {
   } as IFavorite
 }
 
-export { requestGet, requestPost, requestDelete }
+export { requestGet, requestPost, requestDelete, requestGetSummary }

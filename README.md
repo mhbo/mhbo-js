@@ -1,5 +1,7 @@
 # mhbo-js
 
+[![npm version](https://badge.fury.io/js/mhbo-js.svg)](https://badge.fury.io/js/mhbo-js)
+
 A JS wrapper for interacting with the MHBO API via nodeJS. **This library is NOT intended for browser usage as it requires an embedded secret key.** This project should serve as a proof of concept for allowing third parties to interact with the MHBO api via other languages or platforms.
 
 ## Usage
