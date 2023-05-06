@@ -287,7 +287,9 @@ export interface ITokenResource<T> {
 
 export interface IMHBOApiClient {
   homes: IRestResource<IMobileHome | IMHBOListing>
-  communities: ICommunityRestResource<ICommunity | IMHBOListing>
+  communities: ICommunityRestResource<
+    ICommunity | IMHBOListing | IMHBOSearchSummaryListing
+  >
   users: IFavoritesResource<IFavorite>
   token: ITokenResource<IToken>
 }
