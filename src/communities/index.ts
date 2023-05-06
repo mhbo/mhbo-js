@@ -1,4 +1,4 @@
-import { requestGet } from "../entityRequest"
+import { requestGet, requestGetSummary } from "../entityRequest"
 import queryBuilder from "../queryBuilder"
 import {
   ICommunity,
@@ -8,13 +8,16 @@ import {
   IFetchExecutor,
   IMHBOListing,
   ISearchParams,
+  IMHBOSearchSummaryListing,
 } from "../types"
 
 const communities = (
   creds: ICredentials,
   Ienvironment?: IEnvironment,
   fetchExecutor?: IFetchExecutor
-): ICommunityRestResource<ICommunity | IMHBOListing> => ({
+): ICommunityRestResource<
+  ICommunity | IMHBOListing | IMHBOSearchSummaryListing
+> => ({
   byIds: (params: number[]) =>
     requestGet<ICommunity>(
       `v1/communities/${params.toString()}?detail_level=FULL`,
@@ -32,10 +35,9 @@ const communities = (
       fetchExecutor
     ),
   searchSummaryV2: (params: ISearchParams) =>
-    requestGet<IMHBOListing>(
+    requestGetSummary<IMHBOSearchSummaryListing>(
       `v2/search/?${queryBuilder({ ...params, detailLevel: "SUMMARY" })}`,
       creds,
-      "MHBOListing",
       Ienvironment,
       fetchExecutor
     ),
