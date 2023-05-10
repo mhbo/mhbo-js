@@ -83,6 +83,7 @@ export interface ISearchParams {
   homeTypeId?: IHomeTypeID
   listingIds?: number[]
   detailLevel?: "SUMMARY" | "FULL"
+  page?: number
 }
 
 export interface ICredentials {
@@ -265,9 +266,6 @@ export interface IToken {
 export interface IRestResource<T> {
   byIds: (params: number[]) => Promise<T[]>
   searchSummary: (params: ISearchParams) => Promise<T[]>
-}
-
-export interface ICommunityRestResource<T> extends IRestResource<T> {
   searchSummaryV2: (params: ISearchParams) => Promise<T>
 }
 
@@ -286,8 +284,8 @@ export interface ITokenResource<T> {
 }
 
 export interface IMHBOApiClient {
-  homes: IRestResource<IMobileHome | IMHBOListing>
-  communities: ICommunityRestResource<
+  homes: IRestResource<IMobileHome | IMHBOListing | IMHBOSearchSummaryListing>
+  communities: IRestResource<
     ICommunity | IMHBOListing | IMHBOSearchSummaryListing
   >
   users: IFavoritesResource<IFavorite>
