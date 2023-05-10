@@ -2,22 +2,20 @@ import { requestGet, requestGetSummary } from "../entityRequest"
 import queryBuilder from "../queryBuilder"
 import {
   ICommunity,
-  ICommunityRestResource,
   ICredentials,
   IEnvironment,
   IFetchExecutor,
   IMHBOListing,
   ISearchParams,
   IMHBOSearchSummaryListing,
+  IRestResource,
 } from "../types"
 
 const communities = (
   creds: ICredentials,
   Ienvironment?: IEnvironment,
   fetchExecutor?: IFetchExecutor
-): ICommunityRestResource<
-  ICommunity | IMHBOListing | IMHBOSearchSummaryListing
-> => ({
+): IRestResource<ICommunity | IMHBOListing | IMHBOSearchSummaryListing> => ({
   byIds: (params: number[]) =>
     requestGet<ICommunity>(
       `v1/communities/${params.toString()}?detail_level=FULL`,
