@@ -83,6 +83,7 @@ export interface ISearchParams {
   homeTypeId?: IHomeTypeID
   listingIds?: number[]
   detailLevel?: "SUMMARY" | "FULL"
+  page?: number
 }
 
 export interface ICredentials {
