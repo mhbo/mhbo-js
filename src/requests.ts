@@ -42,7 +42,7 @@ export function authenticatedRequest(
   return request(url, {
     body: method === "POST" ? queryString.stringify(body) : null,
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: token ? `Bearer ${token}` : ``,
       "Content-Type": "application/x-www-form-urlencoded",
     },
     method,

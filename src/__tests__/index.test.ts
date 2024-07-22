@@ -50,6 +50,7 @@ describe("the MHBO API Client", () => {
         updatedAt: "2019-08-16T01:49:13.000-07:00",
         zipCode: "32159",
       },
+      propertyDescription: "description",
       askingPrice: 124995,
       communityId: 21308,
       communityName: "Water Oak Country Club",
